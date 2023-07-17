@@ -22,4 +22,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('', views.Home, name = 'home'),
+
+    path('sobre_nosotros', views.Sobre_nosotros, name = 'sobre_nosotros'),
+
+    path('contacto', views.Contacto, name = 'contacto'),
+
+    path('ingresar', views.Ingresar, name = 'ingresar'),
+
+    path('registrarse', views.Registrarse, name = 'registrarse'),
+
 ]
