@@ -2,15 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-
+    
     background:linear-gradient(rgba(111,42,243,0.3), rgba(0,0,0,0.9)), url("../img/login/fondo1.jpg");
     background-size: cover;
     height: 100vh;
 }
 
 .contenedor{
-    width: 400px;
+    width: 420px;
     background: transparent;
     backdrop-filter: blur(20px);
     color: white;
