@@ -1,0 +1,17 @@
+body{
+    background: hsl(206, 33%, 96%);
+}
+.linea{
+    height: 0.25rem;
+  width: 10rem;
+  background: hsl(240, 100%, 40%);
+  margin-left: auto;
+  margin-right: auto;
+}
+h2{
+    color: hsl(245, 17%, 29%);
+}
+.col .card{
+    width: 50vh;
+    height: 50vh;
+}
