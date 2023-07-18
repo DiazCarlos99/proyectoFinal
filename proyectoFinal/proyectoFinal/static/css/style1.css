@@ -79,7 +79,8 @@ article:nth-of-type(3) {
 
 footer{
   background: black;
-  position: absolute;
+  display: absolute;
+  bottom: 0;
   width: 100%;
   height: 50px;
   text-align: center;
