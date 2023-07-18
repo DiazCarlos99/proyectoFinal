@@ -1,17 +1,11 @@
 {% extends 'base.html' %}
-{% block contenido %}
 
-{% load static %}	
-<!DOCTYPE html>
-<html lang="ES">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfoBlog</title>
+{%block css%}
     <link rel="stylesheet" href="{% static 'css/style_login.css'%}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
+{%endblock css%}
+
+{% block contenido %}
     <div class="base">
         <form class="contenedor">
             <h1>Login Here</h1>
@@ -29,6 +23,4 @@
             <button type="submit" class="boton">INGRESAR</button>
         </form>
     </div> 
-</body>
-</html>
 {% endblock contenido %}
