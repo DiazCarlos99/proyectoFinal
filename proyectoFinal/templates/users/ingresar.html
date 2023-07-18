@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/style_login.css'%}">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock css %}
+
+    {% block contenido %}
+
+
+
+        <div class="base">
+            <form class="contenedor">
+                <h1>Login Here</h1>
+                <div class="input-box">
+                    <input id="usuario" name="usuario" type="text" placeholder="Nombre de Usuario" required>
+                     <i class='bx bx-user-circle'></i>
+                </div>
+                <div class="input-box">
+                    <input id="contraseña" name="contraseña" type="password" placeholder="Contraseña" required>
+                    <i class='bx bx-lock-alt'></i>
+                </div>
+                <div class="rec_contraseña">
+                    <label><input type="checkbox" name="recordar contraseña" id="recordar contraseña"> Recordar contraseña</label>
+                </div>
+                <button name="ingresar" type="submit" class="boton">INGRESAR</button>
+            </form>
+        </div> 
+    {% endblock contenido %}
