@@ -15,9 +15,9 @@ def Contacto(request):
 
 def Ingresar(request):
 
-	return render(request,'users/ingresar.html')
+	return render(request,'login/ingresar.html')
 
 def Registrarse(request):
 
-	return render(request,'users/registrarse.html')
+	return render(request,'login/registrarse.html')
 
