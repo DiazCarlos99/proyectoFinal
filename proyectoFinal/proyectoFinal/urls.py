@@ -17,6 +17,7 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib import admin
 from . import views
+from django.contrib.auth import views as auth
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -36,6 +37,10 @@ urlpatterns = [
 
     # url de de las aplicaciones
     path('users/', include('apps.users.urls')),
+    
+    path('login/',auth.LoginView.as_view(template_name='usuarios/login.html'),name='login'),
+
+    path('logout/',auth.LogoutView.as_view(),name="logout"),
 
 ]
 # Configuración para servir archivos estáticos en desarrollo

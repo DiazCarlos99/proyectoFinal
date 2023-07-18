@@ -7,4 +7,6 @@ urlpatterns = [
 
     path('users', views.Users, name = 'users'),
 
+    path('Registro', views.Registro.as_view(), name="registrar"),
+
 ]
