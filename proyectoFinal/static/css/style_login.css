@@ -73,3 +73,8 @@
     margin-bottom: 10px;
 
 }
+
+.contenedor .boton:hover{
+    background-color: #6F2AF3;
+    color: white;
+}
