@@ -36,13 +36,6 @@ urlpatterns = [
     path('registrarse', views.Registrarse, name = 'registrarse'),
 
     # url de de las aplicaciones
-    path('users/', include('apps.users.urls')),
-    
-    path('login/',auth.LoginView.as_view(template_name='usuarios/login.html'),name='login'),
-
-    path('logout/',auth.LogoutView.as_view(),name="logout"),
 
 ]
 # Configuración para servir archivos estáticos en desarrollo
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
