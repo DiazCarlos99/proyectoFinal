@@ -37,10 +37,19 @@
 
 .helptext{
     display: none;
-    justify-content: ;
-    justify-items: ;
 }
 
+.contenedor input{
+    width: 100%;
+    height: 80%;
+    background: transparent;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: white;
+}
 
+.contenedor div p input .btn-primary{
+    background-color: brown;
+}
 
 
