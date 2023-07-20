@@ -18,8 +18,8 @@
                 <input id="password" name="password" type="password" placeholder="Contraseña" required>
                 <i class='bx bx-lock-alt'></i>
             </div>
-            <div class="rec_contraseña">
-                <label><input type="checkbox" name="recordar contraseña" id="recordar contraseña"> Recordar contraseña</label>
+            <div class="registrarse">
+                <p>Si todavía no tienes una cuenta <a href="{% url 'usuarios:registrar' %}"> registrate aquí</a></p>
             </div>
             <button name="" type="submit" class="boton">INGRESAR</button>
             {{form.errors}}
