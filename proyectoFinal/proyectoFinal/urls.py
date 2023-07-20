@@ -19,6 +19,9 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +32,7 @@ urlpatterns = [
 
     path('contacto', views.Contacto, name = 'contacto'),
 
-    path('emprendimientos', views.Empr, name = 'empr'),
+    #path('emprendimientos', views.Empr, name = 'empr'),
 
     #URLS DE AUTH
     path('login/',auth.LoginView.as_view(template_name='usuarios/login.html'),name='login'),
@@ -39,6 +42,9 @@ urlpatterns = [
     path('usuarios/', include('apps.usuarios.urls')),
 
     # url de de las aplicaciones
-
-]
+    
+    #url de empr
+    path('emprendimientos/', include('apps.empr.urls')),
+    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #sirve para acceder a los archivos media
 # Configuración para servir archivos estáticos en desarrollo

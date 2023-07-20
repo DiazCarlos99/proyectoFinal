@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<div class="container">
+    <div class="row mt-3">
+      	<div class="col-md-9 mx-auto mb-5">
+				<div class="row">
+      				<div class="col-md-9 text-center">
+							<h1 class="text-center titulo">{{emprendimiento.titulo}}</h1>
+
+      						<img src="{{emprendimiento.imagen.url}}" width="200" style="margin-bottom:30px">
+      						<p class="autor text-center">AUTOR: {{emprendimiento.autor}}</p>
+							<h3>{{emprendimiento.resumen}}</h3>
+                            <p class="autor text-center">{{emprendimiento.contenido}}</p>
+							<p class="categoria">CATEGORIA: {{emprendimiento.categoria}}</p>
+      						<p class="fecha">FECHA: {{emprendimiento.creado}}</p>
+      				</div>
+				</div>
+      	</div>
+  	</div>
+</div>
+{% endblock contenido %}

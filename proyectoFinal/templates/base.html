@@ -34,7 +34,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'empr' %}">Emprendieminetos</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'empr:listar_emprendimientos' %}">Emprendieminetos</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -42,14 +42,9 @@
                                 Categorías
                             </a>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Comercial</a></li>
-                              <li><a class="dropdown-item" href="#">Servicios Profecionales</a></li>
-                              <li><a class="dropdown-item" href="#">Deporte</a></li>
-                              <li><a class="dropdown-item" href="#">Tecnológico</a></li>
-                              <li><a class="dropdown-item" href="#">Cultural</a></li>
-                              <li><a class="dropdown-item" href="#">Moda y Diseño</a></li>
-                              <li><a class="dropdown-item" href="#">Alimentación</a></li>
-                              <li><a class="dropdown-item" href="#">Salud y Bienestar</a></li>
+                                {%for categoria in categorias%}
+                              <li><a class="dropdown-item" href="#">{{categoria.nombre}}</a></li>
+                                {%endfor%}
                             </ul>
                         </li> 
 

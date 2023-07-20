@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.empr',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
         },
     },
 ]
+TEMPLATES[0]['OPTIONS']['context_processors'].append('proyectoFinal.context_processors.categorias_processor')
 
 WSGI_APPLICATION = 'proyectoFinal.wsgi.application'
 
@@ -117,6 +119,8 @@ STATICFILES_DIRS = (
     os.path.join(os.path.dirname(BASE_DIR),'static'),
     )
 
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
