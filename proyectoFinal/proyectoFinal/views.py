@@ -13,11 +13,7 @@ def Contacto(request):
 
 	return render(request,'contacto.html')
 
-def Ingresar(request):
+def Empr(request):
 
-	return render(request,'login/ingresar.html')
-
-def Registrarse(request):
-
-	return render(request,'login/registrarse.html')
+	return render(request,'empr.html')
 

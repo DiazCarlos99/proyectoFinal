@@ -29,9 +29,7 @@ urlpatterns = [
 
     path('contacto', views.Contacto, name = 'contacto'),
 
-    path('ingresar', views.Ingresar, name = 'ingresar'),
-
-    path('registrarse', views.Registrarse, name = 'registrarse'),
+    path('emprendimientos', views.Empr, name = 'empr'),
 
     #URLS DE AUTH
     path('login/',auth.LoginView.as_view(template_name='usuarios/login.html'),name='login'),
