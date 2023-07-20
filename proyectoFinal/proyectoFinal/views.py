@@ -21,3 +21,6 @@ def Registrarse(request):
 
 	return render(request,'users/registrarse.html')
 
+def Noticias(request):
+
+	return render(request,'post.html')

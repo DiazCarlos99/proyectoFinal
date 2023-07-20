@@ -31,4 +31,6 @@ urlpatterns = [
 
     path('registrarse', views.Registrarse, name = 'registrarse'),
 
+    path('noticias', views.Noticias, name = 'noticias'),
+
 ]
