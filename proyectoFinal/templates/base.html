@@ -1,27 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="ES">
-<html>
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block css %}
+        {% endblock css %}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<<<<<<< HEAD
         <link rel="stylesheet" href="{% static 'css/style.css'%}">
         {% block css%}
         {%endblock css%}
+=======
+        <link rel="stylesheet" href="{% static 'css/style1.css'%}">
+       
+>>>>>>> 650824c673df087e8b212a5fa22ef9a79c15202e
         <title>InfoBlog</title>
     </head>
-    <body>       
+    <body>
+
+        {% if user.is_authenticated %}
+
         <nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #6F2AF3;">
             <div class="container-fluid">
                 <!-- Acá está el logo de nuestro blog -->
                 <a class="navbar-brand" href="{% url 'home' %}">
                     <img src="{% static 'img/InfoBlog_Logo.png'%}" alt="Bootstrap" class="estlogo">
                 </a>
-                <a class="navbar-brand mb-0 h1 fw-bold" href="{% url 'home' %}" >Home</a>
+                <a class="navbar-brand mb-0 h1 fw-bold" href="{% url 'home' %}" >Inicio</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,7 +40,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Artículos</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'empr' %}">Emprendieminetos</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -56,15 +65,50 @@
                         </li>
 
                     </ul>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="*"><button type="button" class="btn btn-light btn-sm">{{user.username}}</button></a>
+                        <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary btn-sm">Salir</button></a>
+                    </div>
+
+        {% else %}
+
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #6F2AF3;">
+            <div class="container-fluid">
+                <!-- Acá está el logo de nuestro blog -->
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/InfoBlog_Logo.png'%}" alt="Bootstrap" class="estlogo">
+                </a>
+                <a class="navbar-brand mb-0 h1 fw-bold" href="{% url 'home' %}" >Inicio</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sobre_nosotros' %}">Sobre Nosotros</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+                        </li>
+
+                    </ul>                    
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{% url 'ingresar' %}"><button type="button" class="btn btn-light btn-sm">Ingresar</button></a>
-                        <a href="{% url 'registrarse' %}"><button type="button" class="btn btn-secondary btn-sm">Registrarse</button></a>
+                        <a href="{% url 'login' %}"><button type="button" class="btn btn-light btn-sm">Ingresar</button></a>
+                        <a href="{% url 'usuarios:registrar' %}"><button type="button" class="btn btn-secondary btn-sm">Registrarse</button></a>
                     </div>
+
+                    {% endif %}
 
                 </div>
             </div>
         </nav>
+        
        {% block contenido %}
 
        {% endblock contenido %}

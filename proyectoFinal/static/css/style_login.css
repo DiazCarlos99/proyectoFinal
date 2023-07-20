@@ -2,8 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-
+    
     background:linear-gradient(rgba(111,42,243,0.3), rgba(0,0,0,0.9)), url("../img/login/fondo1.jpg");
     background-size: cover;
     height: 100vh;
@@ -55,9 +54,14 @@
     font-size: 25px;
 }
 
-.contenedor .rec_contraseña{
+.contenedor .registrarse{
     font-size: 15px;
     margin: -15px 0 15px;
+    text-align: center;
+}
+
+.contenedor .registrarse p{
+    display: inline;
 }
 
 .contenedor .boton{
@@ -70,7 +74,11 @@
     cursor: pointer;
     font-size: 16px;
     color: black;
-    font-weight: 500;
     margin-bottom: 10px;
 
+}
+
+.contenedor .boton:hover{
+    background-color: #6F2AF3;
+    color: white;
 }

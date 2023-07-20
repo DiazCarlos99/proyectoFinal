@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_login.css'%}">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+{% endblock css %}
+
+{% block contenido %}
+    <div class="base">
+        <form method="POST" class="contenedor">{%csrf_token%}
+            <h1>Ingresar</h1>
+            <div class="input-box">
+                <input id="username" name="username" type="text" placeholder="Nombre de Usuario" required>
+                    <i class='bx bx-user-circle'></i>
+            </div>
+            <div class="input-box">
+                <input id="password" name="password" type="password" placeholder="Contraseña" required>
+                <i class='bx bx-lock-alt'></i>
+            </div>
+            <div class="registrarse">
+                <p>Si todavía no tienes una cuenta <a href="{% url 'usuarios:registrar' %}"> registrate aquí</a></p>
+            </div>
+            <button name="" type="submit" class="boton">INGRESAR</button>
+            {{form.errors}}
+        </form>
+    </div> 
+{% endblock contenido %}

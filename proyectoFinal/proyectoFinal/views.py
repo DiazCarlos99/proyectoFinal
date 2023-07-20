@@ -13,13 +13,9 @@ def Contacto(request):
 
 	return render(request,'contacto.html')
 
-def Ingresar(request):
+def Empr(request):
 
-	return render(request,'users/ingresar.html')
-
-def Registrarse(request):
-
-	return render(request,'users/registrarse.html')
+	return render(request,'empr.html')
 
 def Noticias(request):
 
