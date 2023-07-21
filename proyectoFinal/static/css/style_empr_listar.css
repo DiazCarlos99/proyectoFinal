@@ -1,6 +1,6 @@
 /*=======*/
 .categorias{
-  background: red;
+ 
   width: 100%;
   height: auto;
   padding: 15px;
@@ -8,6 +8,8 @@
 }
 /*>>>>>>> ce03856f6a7ebda84eb960fc8b6ea70a0e37cdbe*/
 
+
+/* Estilo del título*/
 .titulo{
   margin: 0%;
 }
@@ -45,8 +47,7 @@
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: #4070F4;
-    border-radius: 25px 25px 0 25px;
+    background-color: rgb(111,42,243);
   }
   .overlay::before,
   .overlay::after{

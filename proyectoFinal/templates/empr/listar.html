@@ -11,8 +11,8 @@
 
 <div class="categorias">
 	<div class="row d-flex justify-content-around text-center">
-		<div class="">
-		  <h2>Ultimos emprendimimentos</h2>
+		<div class="titulo">
+		  <h2>{{enprendimientos.categorias}}</h2>
 		</div>
 		{%if num_emprendimientos == 0%}
 		<h1>No hay Emprendimientos disponibles</h1>
@@ -28,7 +28,7 @@
 				  
 				  <span class="overlay"></span>
 				  <div class="card-image">
-					<img src="{{emprendimimento.imagen.url}}" alt="" class="card-img">
+					<img src="{{emprendimimento.imagen.url}}" alt="logo" class="card-img">
 				  </div>
 				</div>
 				<div class="card-content">
@@ -47,9 +47,7 @@
 		</div>
 		{%endif%}
 	  </div>
-
-
-
 </div>
+
 
 {% endblock contenido %}
