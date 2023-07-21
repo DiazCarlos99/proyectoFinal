@@ -10,5 +10,8 @@ urlpatterns = [
     
     path('Detalle/<int:pk>', views.DetalleEmprendimientos, name="detalle_emprendimiento"),
      
+    path('Editar/<int:pk>', views.EditarEmprendimientos.as_view(), name="editar_emprendimientos"),
+    
+    path('Eliminar/<int:pk>', views.EliminarEmprendimientos.as_view(), name="eliminar_emprendimiento"),
      
 ] 

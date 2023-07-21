@@ -11,6 +11,16 @@ body{
   background: linear-gradient(rgba(111,42,243,0.5), rgba(111,42,243,0.2)) ,url("https://ais-akamai.rtl.de/masters/1420583/1686x0/leon-windscheid-nach-einem-jahr-war-sein-wwm-millionengewinn-weg.jpg");
   background-size:cover;
 }
+a{
+  text-decoration: none;
+}
+.titulo, .autor{
+  color: black;
+}
+.categoria{
+  color:red;
+}
+/*
 /*
 nav
 */

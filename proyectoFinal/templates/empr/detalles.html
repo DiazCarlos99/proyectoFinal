@@ -17,6 +17,8 @@
       						<p class="fecha">FECHA: {{emprendimiento.creado}}</p>
       				</div>
 				</div>
+				<a href="{%url 'empr:eliminar_emprendimiento' emprendimiento.pk%}" class="btn btn-info text-center">eliminar</a>
+		  		<a href="{%url 'empr:editar_emprendimientos' emprendimiento.pk%}" class="btn btn-success text-center">editar</a>
       	</div>
   	</div>
 </div>
