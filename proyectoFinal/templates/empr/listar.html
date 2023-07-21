@@ -6,169 +6,38 @@
 {% endblock css %}
 
 {% block contenido %}
-<div class="by">
-	<!-- Insertar Aquí contenido -->
-	<div class="contenedor">
-		<div class="titulo">
-			<div class="shape right-skew">
-				<i class="fas fa-laptop"></i>
-				<h2>Tecnología</h2>
-			</div>
-			<span class="txt-titulo">Mostrando 4 de 6 elementos</span>
+<a href="{%url 'empr:crear_empredimiento'%}" class="btn btn-info text-center">Crear emprendimento</a>
+
+<div class="categorias">
+	<div class="row">
+		{% if not object_list%}
+		<h1>No hay emprendimentos disponibles</h1>
+		{%else%}
+		{% for n in object_list %}
+		<div class="col-md-4 text-center">
+		  <a href="{%url 'empr:detalle_emprendimiento' n.pk %}">
+			  <h2 class="text-center titulo">{{n.titulo}}</h2>
+				<img src="{{n.imagen.url}}" width="200" style="margin-bottom:30px">
+				<p class="autor text-center">AUTOR: {{n.autor}}</p>
+			  <p class="categoria">CATEGORIA: {{n.categoria}}</p>
+				<p class="fecha">FECHA: {{n.creado}}</p>
+				<hr>
+		  </a>
 		</div>
-		<div class="slider carousel">
-			<div class="producto item">
-				<div class="contenedor-imagen">
-					<a href="#" class="link"></a>
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+1">
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
-				</div>				
-				<div class="datos">
-					<div class="starrr"></div>
-					<small><a href="#">Gopro</a></small>
-					<h3><a href="#">Gopro hero silver 7</a></h3>
-					<small>SKU: 32383ee090pi</small>
-				</div>
-				<div class="precios">
-					<div class="internet">
-						<small>Internet</small>
-						<span>$189.000</span>
-					</div>
-					<div>
-						<small>Normal</small>
-						<span>$250.000</span>
-					</div>
-				</div>
-				<a href="#" class="btn-carrito"><i class="fas fa-shopping-basket"></i> Agregar al carrito</a>
-			</div>
-			<div class="producto item">
-				<div class="contenedor-imagen">
-					<a href="#" class="link"></a>
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+1">
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
-				</div>				
-				<div class="datos">
-					<div class="starrr"></div>
-					<small><a href="#">Sony</a></small>
-					<h3><a href="#">PARLANTE SONY GTK-PG10</a></h3>
-					<small>SKU: 32383ee090pi</small>
-				</div>
-				<div class="precios">
-					<div class="internet">
-						<small>Internet</small>
-						<span>$189.000</span>
-					</div>
-					<div>
-						<small>Normal</small>
-						<span>$250.000</span>
-					</div>
-				</div>
-				<a href="#" class="btn-carrito"><i class="fas fa-shopping-basket"></i> Agregar al carrito</a>
-			</div>
-			<div class="producto item">
-				<div class="contenedor-imagen">
-					<a href="#" class="link"></a>
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+1">
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
-				</div>				
-				<div class="datos">
-					<div class="starrr"></div>
-					<small><a href="#">Tbl</a></small>
-					<h3><a href="#">AUDIFONOS JBL T110 NEGRO</a></h3>
-					<small>SKU: 32383ee090pi</small>
-				</div>
-				<div class="precios">
-					<div class="internet">
-						<small>Internet</small>
-						<span>$189.000</span>
-					</div>
-					<div>
-						<small>Normal</small>
-						<span>$250.000</span>
-					</div>
-				</div>
-				<a href="#" class="btn-carrito"><i class="fas fa-shopping-basket"></i> Agregar al carrito</a>
-			</div>
-			<div class="producto item">
-				<div class="contenedor-imagen">
-					<a href="#" class="link"></a>
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+1">
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
-				</div>				
-				<div class="datos">
-					<div class="starrr"></div>
-					<small><a href="#">Google</a></small>
-					<h3><a href="#">GOOGLE HOME MINI CARBON</a></h3>
-					<small>SKU: 32383ee090pi</small>
-				</div>
-				<div class="precios">
-					<div class="internet">
-						<small>Internet</small>
-						<span>$189.000</span>
-					</div>
-					<div>
-						<small>Normal</small>
-						<span>$250.000</span>
-					</div>
-				</div>
-				<a href="#" class="btn-carrito"><i class="fas fa-shopping-basket"></i> Agregar al carrito</a>
-			</div>
-			<div class="producto item">
-				<div class="contenedor-imagen">
-					<a href="#" class="link"></a>
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+1">
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
-				</div>				
-				<div class="datos">
-					<div class="starrr"></div>
-					<small><a href="#">Gopro</a></small>
-					<h3><a href="#">Gopro hero silver 7</a></h3>
-					<small>SKU: 32383ee090pi</small>
-				</div>
-				<div class="precios">
-					<div class="internet">
-						<small>Internet</small>
-						<span>$189.000</span>
-					</div>
-					<div>
-						<small>Normal</small>
-						<span>$250.000</span>
-					</div>
-				</div>
-				<a href="#" class="btn-carrito"><i class="fas fa-shopping-basket"></i> Agregar al carrito</a>
-			</div>
-			<div class="producto item">
-				<div class="contenedor-imagen">
-					<a href="#" class="link"></a>
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+1">
-					<img src="https://dummyimage.com/600x400/dbdbdb/474747&text=imagen+2" class="img-hover">
-				</div>				
-				<div class="datos">
-					<div class="starrr"></div>
-					<small><a href="#">Gopro</a></small>
-					<h3><a href="#">Gopro hero silver 7</a></h3>
-					<small>SKU: 32383ee090pi</small>
-				</div>
-				<div class="precios">
-					<div class="internet">
-						<small>Internet</small>
-						<span>$189.000</span>
-					</div>
-					<div>
-						<small>Normal</small>
-						<span>$250.000</span>
-					</div>
-				</div>
-				<a href="#" class="btn-carrito"><i class="fas fa-shopping-basket"></i> Agregar al carrito</a>
-			</div>
-		</div>
+		  {% endfor %}
+		{%endif%}
 	</div>
+
+
+
 </div>
-<script src="{% static 'js/listar.js'%}"></script>
+
+
+
+
 
 <div class="container">
     <div class="row mt-3">
-		<a href="{%url 'empr:crear_empredimiento'%}" class="btn btn-info text-center">Crear emprendimento</a>
       	<div class="col-md-9 mx-auto mb-5">
 				<div class="row">
                     {% if not object_list%}
