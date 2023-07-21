@@ -13,7 +13,8 @@ def emprendimientos_processor(request):
     emprendimientos = Emprendimientos.objects.all()
     num_emprendimientos = len(emprendimientos)
     return{
-        'num_emprendimientos': num_emprendimientos
+        'emprendimientos': emprendimientos,
+        'num_emprendimientos': num_emprendimientos,
     }
     
 def usuarios_processor(request):

@@ -91,8 +91,14 @@ article:nth-of-type(3) {
   max-width: 70%;
   overflow: hidden;
 }
-
-
+/*emprendimientos*/
+.titulo-empr{
+  color: #e7e8e9;
+  padding: 1rem;
+  margin: 4rem;
+  width: auto;
+  border-bottom: solid #f59e0b;
+}
 /*footer*/
 
 footer{
