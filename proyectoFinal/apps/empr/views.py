@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import CreateView, ListView, DeleteView, UpdateView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
 from django.urls import reverse_lazy
 
 from .models import Emprendimientos, Categoria
@@ -21,24 +21,29 @@ class CrearEmpredimiento(LoginRequiredMixin, CreateView):
         emprendimiento.autor = self.request.user
         return super(CrearEmpredimiento, self).form_valid(form)
     
-class   ListarEmprendimientos(ListView):
+class   ListarEmprendimientos(LoginRequiredMixin, ListView):
     model = Emprendimientos
     template_name = 'empr/listar.html'
-
-def DetalleEmprendimientos(request, pk):
+'''
+def DetalleEmprendimientos(LoginRequiredMixin, request, pk):
 	ctx = {}
 	noti = Emprendimientos.objects.get(id = pk)
 	ctx['emprendimiento'] = noti
 	return render(request, 'empr/detalles.html', ctx)
-
-class EditarEmprendimientos(UpdateView):
+'''
+class DetalleEmprendimientos(LoginRequiredMixin ,DetailView):
+    model = Emprendimientos
+    template_name = 'empr/detalles.html'
+    pk_url_kwarg = 'pk' 
+    
+class EditarEmprendimientos(LoginRequiredMixin, UpdateView):
     model = Emprendimientos
     form_class = Form_Modificacion
     template_name = 'empr/editar.html'
     success_url = reverse_lazy('empr:listar_emprendimientos')
     pk_url_kwarg = 'pk'   
     
-class EliminarEmprendimientos(DeleteView):
+class EliminarEmprendimientos(LoginRequiredMixin, DeleteView):
     model = Emprendimientos
     template_name = 'empr/eliminar.html'
     success_url = reverse_lazy('empr:listar_emprendimientos')

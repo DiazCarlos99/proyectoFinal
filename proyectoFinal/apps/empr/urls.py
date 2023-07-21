@@ -8,7 +8,7 @@ urlpatterns = [
     
     path('Listar', views.ListarEmprendimientos.as_view(), name="listar_emprendimientos"),
     
-    path('Detalle/<int:pk>', views.DetalleEmprendimientos, name="detalle_emprendimiento"),
+    path('Detalle/<int:pk>', views.DetalleEmprendimientos.as_view(), name="detalle_emprendimiento"),
      
     path('Editar/<int:pk>', views.EditarEmprendimientos.as_view(), name="editar_emprendimientos"),
     
