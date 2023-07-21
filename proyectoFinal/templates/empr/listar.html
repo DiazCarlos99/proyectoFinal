@@ -2,6 +2,7 @@
 
 {% block css %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
 <link rel="stylesheet" href="{% static 'css/style_empr_listar.css'%}">
 {% endblock css %}
 
@@ -9,55 +10,46 @@
 <a href="{%url 'empr:crear_empredimiento'%}" class="btn btn-info text-center">Crear emprendimento</a>
 
 <div class="categorias">
-	<div class="row">
-		{% if not object_list%}
-		<h1>No hay emprendimentos disponibles</h1>
-		{%else%}
-		{% for n in object_list %}
-		<div class="col-md-4 text-center">
-		  <a href="{%url 'empr:detalle_emprendimiento' n.pk %}">
-			  <h2 class="text-center titulo">{{n.titulo}}</h2>
-				<img src="{{n.imagen.url}}" width="200" style="margin-bottom:30px">
-				<p class="autor text-center">AUTOR: {{n.autor}}</p>
-			  <p class="categoria">CATEGORIA: {{n.categoria}}</p>
-				<p class="fecha">FECHA: {{n.creado}}</p>
-				<hr>
-		  </a>
+	<div class="row d-flex justify-content-around text-center">
+		<div class="">
+		  <h2>Ultimos emprendimimentos</h2>
 		</div>
-		  {% endfor %}
-		{%endif%}
-	</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="container">
-    <div class="row mt-3">
-      	<div class="col-md-9 mx-auto mb-5">
-				<div class="row">
-                    {% if not object_list%}
-                    <h1>No hay emprendimentos disponibles</h1>
-                    {%else%}
-					{% for n in object_list %}
-					<div class="col-md-4 text-center">
-					  <a href="{%url 'empr:detalle_emprendimiento' n.pk %}">
-						  <h2 class="text-center titulo">{{n.titulo}}</h2>
-							<img src="{{n.imagen.url}}" width="200" style="margin-bottom:30px">
-							<p class="autor text-center">AUTOR: {{n.autor}}</p>
-						  <p class="categoria">CATEGORIA: {{n.categoria}}</p>
-							<p class="fecha">FECHA: {{n.creado}}</p>
-							<hr>
-					  </a>
-					</div>
-      				{% endfor %}
-                    {%endif%}
+		{%if num_emprendimientos == 0%}
+		<h1>No hay Emprendimientos disponibles</h1>
+		<h2>Por favor agregue 1</h2>
+		{%else%}
+		<div class="slide-container swiper">
+		  <div class="slide-content">
+			<div class="card-wrapper swiper-wrapper">
+			  {%for emprendimimento in emprendimientos%}
+			  <div class="card swiper-slide">
+				<a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
+				<div class="image-content">
+				  
+				  <span class="overlay"></span>
+				  <div class="card-image">
+					<img src="{{emprendimimento.imagen.url}}" alt="" class="card-img">
+				  </div>
 				</div>
-      	</div>
-  	</div>
+				<div class="card-content">
+				  <h2 class="name">{{emprendimimento.autor}}</h2>
+				  <p class="description">{{emprendimimento.resumen}}</p>
+				</div>
+				<button class="button">Ver más</button>
+			  </a>
+			  </div>
+			  {%endfor%}
+			</div>
+		  </div>
+		  <div class="swiper-button-next swiper-navBtn"></div>
+		  <div class="swiper-button-prev swiper-navBtn"></div>
+		  <div class="swiper-pagination"></div>
+		</div>
+		{%endif%}
+	  </div>
+
+
+
 </div>
+
 {% endblock contenido %}
