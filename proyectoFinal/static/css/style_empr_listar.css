@@ -2,16 +2,5 @@
     background: red;
     width: 100%;
     height: auto;
-}
 
-.carrusel{
-    margin: 30px auto;
 }
-     .carrusel .item{
-         background: none;
-         height: 300px;
-     }
-     .carrusel .item img{
-         min-width: 200px;
-         height: auto;
-     } 
