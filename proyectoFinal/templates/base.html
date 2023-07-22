@@ -58,6 +58,7 @@
                     </ul>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{%url 'empr:crear_empredimiento'%}" class="btn btn-outline-light btn-sm">Crear emprendimento</a>
                         <a href="{% url 'empr:crear_empredimiento' %}"><button type="button" class="btn btn-light btn-sm">{{user.username}}</button></a>
                         <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary btn-sm">Salir</button></a>
                     </div>
