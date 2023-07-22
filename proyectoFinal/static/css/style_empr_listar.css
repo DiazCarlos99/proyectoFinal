@@ -1,18 +1,27 @@
 /*=======*/
-.categorias{
- 
-  width: 100%;
-  height: auto;
-  padding: 15px;
+.contenedor{
+  margin: 0;
+  padding: 0;
+}
 
+.categorias{
+  height: auto;
+  margin: 50px;
+  padding: 20px;
+  border: solid;
+  border-color: #FFF;
+  border-radius: 20px;
+
+}
+
+.titulo{
+  padding-top: 20px;
 }
 /*>>>>>>> ce03856f6a7ebda84eb960fc8b6ea70a0e37cdbe*/
 
 
 /* Estilo del título*/
-.titulo{
-  margin: 0%;
-}
+
 
 /*<<<<<<< HEAD*/
 .slide-container{
@@ -57,7 +66,7 @@
     bottom: -40px;
     height: 40px;
     width: 40px;
-    background-color: #4070F4;
+    background-color: rgb(111,42,243);
   }
   .overlay::after{
     border-radius: 0 25px 0 0;
