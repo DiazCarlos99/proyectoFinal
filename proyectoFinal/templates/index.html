@@ -12,7 +12,7 @@
       <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel"> 
         <div class="carousel-inner">
 
-          {%if not categorias%}
+          {%if not cat_context%}
           <div class="carousel-item active">
             <img src="{% static 'img/empr/comercio.jpg'%}" style="width: 100%" class="d-block w-100" alt="comercial">
             <div class="carousel-caption d-none d-md-block ">
@@ -21,8 +21,8 @@
               </div>
           </div>
           {%else%}
-            {% for categoria in categorias%}
-            <div class="carousel-item active">
+            {% for categoria in cat_context%}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
               <img src="{{categoria.imagen.url}}" class="d-block w-100" alt="comercial">
               <div class="carousel-caption d-none d-md-block ">
                   <h5>{{categoria.nombre}}</h5>
@@ -54,7 +54,7 @@
             <!-- end of single number -->
             <!-- single number -->
             <article class="col-lg-3 col-sm-12 contador">
-                <span class="number" data-value="{{num_emprendimientos}}">0 +</span>
+                <span class="number" data-value="{{num_emprendimientos}}">0 +</span> 
                 <p>Emprendimientos</p>
             </article >
             <!-- end of single number -->
@@ -77,7 +77,7 @@
           <div class="slide-container swiper">
             <div class="slide-content">
               <div class="card-wrapper swiper-wrapper">
-                {%for emprendimimento in emprendimientos%}
+                {%for emprendimimento in empr_context%}
                 <div class="card swiper-slide">
                   <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
                   <div class="image-content">

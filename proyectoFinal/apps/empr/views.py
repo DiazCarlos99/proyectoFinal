@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
@@ -9,10 +9,14 @@ from .forms import Form_Alta,  Form_Modificacion
 
 #CONTROLA SI EL USUARIO ESTA LOGEADO
 from django.contrib.auth.mixins import LoginRequiredMixin
+#se importan los alert o mensajes
+from django.contrib import messages
+#redireccion a la misma pagina
+
 
 class CrearEmpredimiento(LoginRequiredMixin, CreateView):
     model = Emprendimientos
-    form_class = Form_Alta
+    form_class = Form_Alta 
     template_name = 'empr/crear.html' #nombre del template
     success_url = reverse_lazy('empr:listar_emprendimientos') #una vez creada la noticia a donde direcciona
 
@@ -23,7 +27,15 @@ class CrearEmpredimiento(LoginRequiredMixin, CreateView):
     
 class   ListarEmprendimientos(LoginRequiredMixin, ListView):
     model = Emprendimientos
-    template_name = 'empr/listar.html'
+    template_name = 'empr/listar.html' 
+    context_object_name = 'emprendimientos_por_categoria'
+    
+    def get(self, request, *args, **kwargs):
+        emprendimiento_id = request.GET.get('emprendimiento_id')
+        if emprendimiento_id:
+            messages.success(request, 'El emprendimiento ha sido eliminado exitosamente.')
+        return super().get(request, *args, **kwargs)
+
 '''
 def DetalleEmprendimientos(LoginRequiredMixin, request, pk):
 	ctx = {}
@@ -31,19 +43,45 @@ def DetalleEmprendimientos(LoginRequiredMixin, request, pk):
 	ctx['emprendimiento'] = noti
 	return render(request, 'empr/detalles.html', ctx)
 '''
+
 class DetalleEmprendimientos(LoginRequiredMixin ,DetailView):
-    model = Emprendimientos
+    model = Emprendimientos 
     template_name = 'empr/detalles.html'
-    pk_url_kwarg = 'pk' 
+
     
 class EditarEmprendimientos(LoginRequiredMixin, UpdateView):
     model = Emprendimientos
     form_class = Form_Modificacion
     template_name = 'empr/editar.html'
-    success_url = reverse_lazy('empr:listar_emprendimientos')
-    pk_url_kwarg = 'pk'   
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Agregar el ID del emprendimiento en el contexto
+        context['emprendimiento_id'] = self.object.pk
+        return context
+    
+    def get_success_url(self):
+        # Redirigir a la página de detalles del emprendimiento editado
+        emprendimiento_id = self.object.pk
+        return reverse_lazy('empr:detalle_emprendimiento', kwargs={'pk': emprendimiento_id})
+    
+    def form_valid(self, form):
+        # Lógica de actualización del emprendimiento
+        messages.success(self.request, 'El emprendimiento ha sido actualizado exitosamente.')
+        return super().form_valid(form)
+
+     
 class EliminarEmprendimientos(LoginRequiredMixin, DeleteView):
     model = Emprendimientos
     template_name = 'empr/eliminar.html'
     success_url = reverse_lazy('empr:listar_emprendimientos')
+
+    def delete(self, request, *args, **kwargs):
+        # Obtenemos el emprendimiento que se va a eliminar
+        emprendimiento = self.get_object()
+
+        # Eliminamos el emprendimiento
+        self.perform_destroy(emprendimiento)
+
+        # Redireccionamos a la página de listar con el ID del emprendimiento eliminado
+        return redirect('empr:listar_emprendimientos', emprendimiento_id=emprendimiento.pk)

@@ -8,7 +8,7 @@
 {% block contenido %}
 
 <div class="base">
-  <form class="contenedor" action="" method="post">{% csrf_token %}         
+  <form class="contenedor" action="" method="post" enctype="multipart/form-data">{% csrf_token %}         
   <h3 class="mb-4">Crerar Noticia</h3>
     {{form.as_div}}
     <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>

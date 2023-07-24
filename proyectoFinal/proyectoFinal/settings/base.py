@@ -74,6 +74,7 @@ TEMPLATES = [
 TEMPLATES[0]['OPTIONS']['context_processors'].append('proyectoFinal.context_processors.categorias_processor')
 TEMPLATES[0]['OPTIONS']['context_processors'].append('proyectoFinal.context_processors.emprendimientos_processor')
 TEMPLATES[0]['OPTIONS']['context_processors'].append('proyectoFinal.context_processors.usuarios_processor')
+TEMPLATES[0]['OPTIONS']['context_processors'].append('proyectoFinal.context_processors.emprendimientos_categorias')
 
 
 WSGI_APPLICATION = 'proyectoFinal.wsgi.application'

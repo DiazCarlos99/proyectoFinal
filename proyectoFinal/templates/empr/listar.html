@@ -9,12 +9,24 @@
 {% block contenido %}
 
 <div class="contenedor">
+	<!-- Aquí puedes mostrar los detalles del emprendimiento si es necesario -->
 
-	<div class="categorias" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({% static 'img/empr/comercio.jpg'%});">
+	{%for mensaje in messages%}
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong>Bien hecho!</strong> {{ mensaje }}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	  </div>
+	{%endfor%}
+	<!--aqui termina el mensaje-->
+{% for categoria, emprendimientos in empr_cat.items %}
+	<div class="categorias" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{ categoria.imagen.url }});">
+		
 		<div class="row d-flex justify-content-around text-center">
-			<div class="titulo">
+			{%if categoria%}
+			<div class="">
+				
 				<!-- acá va el nombre de cada categoría en automático -->
-				<h2>Comercial</h2>
+				<h2>{{categoria.nombre}}</h2>
 				
 			</div>
 			{%if num_emprendimientos == 0%}
@@ -50,49 +62,11 @@
 			</div>
 			{%endif%}
 		</div>
+		
 	</div>
 
-	<div class="categorias" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({% static 'img/empr/serv_profecionales.jpg'%});">
-		<div class="row d-flex justify-content-around text-center">
-			<div class="titulo">
-				<!-- acá va el nombre de cada categoría en automático -->
-				<h2>Servicios Profecionales</h2>
-				
-			</div>
-			{%if num_emprendimientos == 0%}
-			<h1>No hay Emprendimientos disponibles</h1>
-			<h2>Por favor agregue 1</h2>
-			{%else%}
-			<div class="slide-container swiper">
-			<div class="slide-content">
-				<div class="card-wrapper swiper-wrapper">
-				{%for emprendimimento in emprendimientos%}
-				<div class="card swiper-slide">
-					<a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
-					<div class="image-content">
-					
-					<span class="overlay"></span>
-					<div class="card-image">
-						<img src="{{emprendimimento.imagen.url}}" alt="logo" class="card-img">
-					</div>
-					</div>
-					<div class="card-content">
-						<h2 class="titulo">{{emprendimimento.titulo}}</h2>
-						<p class="name">{{emprendimimento.autor}}</p>
-					</div>
-					<button class="button">Ver más</button>
-				</a>
-				</div>
-				{%endfor%}
-				</div>
-			</div>
-			<div class="swiper-button-next swiper-navBtn"></div>
-			<div class="swiper-button-prev swiper-navBtn"></div>
-			<div class="swiper-pagination"></div>
-			</div>
-			{%endif%}
-		</div>
-	</div>
-
+	{%endif%}
+{% endfor %}
 </div>
+
 {% endblock contenido %}
