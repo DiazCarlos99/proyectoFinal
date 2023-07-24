@@ -80,16 +80,12 @@
                 {%for emprendimimento in empr_context%}
                 <div class="card swiper-slide">
                   <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
-                  <div class="image-content">
-                    
-                    <span class="overlay"></span>
-                    <div class="card-image">
-                      <img src="{{emprendimimento.imagen.url}}" alt="" class="card-img">
-                    </div>
+                  <div class="img-content">
+                    <img src="{{emprendimimento.imagen.url}}" alt="foto">
                   </div>
                   <div class="card-content">
-                    <h2 class="name">{{emprendimimento.autor}}</h2>
-                    <p class="description">{{emprendimimento.resumen}}</p>
+                    <h2 class="titulo">{{emprendimimento.titulo}}</h2>
+							      <p class="name">{{emprendimimento.resumen}}</p>
                   </div>
                   <button class="button">Ver más</button>
                 </a>
@@ -103,6 +99,7 @@
           </div>
           {%endif%}
         </div>
+
     </div>
 </div>
 

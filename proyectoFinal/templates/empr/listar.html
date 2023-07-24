@@ -29,7 +29,7 @@
 			<div class="">
 				
 				<!-- acá va el nombre de cada categoría en automático -->
-				<h2>{{categoria.nombre}}</h2>
+				<h2 class="titulo-cat">{{categoria.nombre}}</h2>
 				
 			</div>
 			{%if num_emprendimientos == 0%}
@@ -42,16 +42,13 @@
 					{%for emprendimimento in emprendimientos%}
 					<div class="card swiper-slide">
 						<a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
-						<div class="image-content">
-						
-						<span class="overlay"></span>
-						<div class="card-image">
-							<img src="{{emprendimimento.imagen.url}}" alt="logo" class="card-img">
-						</div>
+						<div class="img-content">
+							<img src="{{emprendimimento.imagen.url}}" alt="foto">
+
 						</div>
 						<div class="card-content">
 							<h2 class="titulo">{{emprendimimento.titulo}}</h2>
-							<p class="name">{{emprendimimento.autor}}</p>
+							<p class="name">{{emprendimimento.resumen}}</p>
 						</div>
 						<button class="button">Ver más</button>
 					</a>
