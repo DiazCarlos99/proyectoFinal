@@ -41,8 +41,8 @@
                                 Categorías
                             </a>
                             <ul class="dropdown-menu">
-                                {%for categoria in categorias%}
-                              <li><a class="dropdown-item" href="#">{{categoria.nombre}}</a></li>
+                                {%for categoria in cat_context%}
+                              <li><a class="dropdown-item" href="{%url 'empr:filtrar_emprendimientos' categoria.nombre%}">{{categoria.nombre}}</a></li>
                                 {%endfor%}
                             </ul>
                         </li> 

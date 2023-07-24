@@ -6,10 +6,17 @@ class Form_Alta(forms.ModelForm):
 
     class Meta:
         model = Emprendimientos
-        fields = ('titulo','contenido','imagen','categoria', 'resumen')
-
+        fields = ('titulo','resumen','contenido','categoria','imagen' )
+        labels = {
+            'resumen': 'Breve Descripción',
+            'contenido': 'Descripción',
+        }
 class Form_Modificacion(forms.ModelForm):
 
     class Meta:
         model = Emprendimientos
-        fields = ('contenido','imagen','categoria', 'resumen', 'imagen')
+        fields = ('titulo','resumen','contenido','categoria','imagen')
+        labels = {
+            'resumen': 'Breve Descripción',
+            'contenido': 'Descripción',
+        }

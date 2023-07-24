@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block contenido %}
+	
+	<div class="container">
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            {% url 'empr:emprendimiento_alfabetico' 'desc' as url_desc %}
+            {% url 'empr:emprendimiento_alfabetico' 'asc' as url_asc %}
+            {% url 'empr:emprendimiento_antiguedad' 'desc' as url_a_desc %}
+            {% url 'emprendimiento_antiguedad' 'asc' as url_a_asc %}
+            {%if request.path == url_asc %}
+            <a href="{%url 'empr:emprendimiento_alfabetico' 'desc'%}"><button type="button" class="btn btn-danger">Abecedario / desc</button></a>
+            {%elif request.path == url_desc%}
+            <a href="{%url 'empr:emprendimiento_alfabetico' 'asc'%}"><button type="button" class="btn btn-danger">Abecedario / asc</button></a>
+            {%else%}
+            <a href="{%url 'empr:emprendimiento_alfabetico' 'desc'%}"><button type="button" class="btn btn-danger">Abecedario / desc</button></a>
+            <a href="{%url 'empr:emprendimiento_alfabetico' 'asc'%}"><button type="button" class="btn btn-danger">Abecedario / asc</button></a>
+            {%endif%}
+            {%if request.path == url_a_asc %}
+            <a href="{%url 'empr:emprendimiento_antiguedad' 'asc'%}"><button type="button" class="btn btn-warning">Ascendente</button></a>
+            {%elif request.path == url_a_desc%}
+            <a href="{%url 'empr:emprendimiento_antiguedad' 'desc'%}"><button type="button" class="btn btn-success">Descendente</button></a>
+            {%else%}
+            <a href="{%url 'empr:emprendimiento_antiguedad' 'desc'%}"><button type="button" class="btn btn-warning">Ascendente</button></a>
+            <a href="{%url 'empr:emprendimiento_antiguedad' 'asc'%}"><button type="button" class="btn btn-success">Descendente</button></a>
+            {%endif%}
+        </div>
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto mb-5">
+      	 {% for cat in emprendimentos %}
+            <a href="{% url 'noticias:filtro_categoria' cat.pk %}">
+              {{cat.nombre}}
+            </a><br><br>
+         {% endfor %}
+      
+      </div>
+    </div>
+  </div>
+
+{% endblock contenido %}

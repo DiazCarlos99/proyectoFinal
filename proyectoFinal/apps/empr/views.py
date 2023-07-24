@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -85,3 +87,46 @@ class EliminarEmprendimientos(LoginRequiredMixin, DeleteView):
 
         # Redireccionamos a la página de listar con el ID del emprendimiento eliminado
         return redirect('empr:listar_emprendimientos', emprendimiento_id=emprendimiento.pk)
+    
+class  FiltrarEmprendimientos(LoginRequiredMixin, ListView):
+    model = Emprendimientos
+    template_name = 'empr/filtrar.html'
+    success_url = reverse_lazy('empr:filtrar_emprendimientos')
+    context_object_name = 'emprendimientos_filtrados'
+    
+    def get_queryset(self):
+        #obtenemos el valor de nombre desde la url
+        nombre = self.kwargs.get('nombre')
+        #filtramos segun id
+        queryset = Emprendimientos.objects.filter(categoria__nombre=nombre)
+        return queryset
+    
+class Categorias(LoginRequiredMixin, ListView):
+    model = Categoria
+    template_name = 'empr/categorias.html'
+    
+class FiltrarPorAntiguedad(ListView):
+    model = Emprendimientos
+    template_name = 'empr/categorias.html'
+    context_object_name = 'emprendimientos'
+    
+    def get_queryset(self):
+        orden = self.kwargs.get('orden')
+        
+        if orden == 'asc':
+            return Emprendimientos.objects.order_by('creado')
+        elif orden == 'desc':
+            return Emprendimientos.objects.order_by('-creado')
+        
+class FiltrarPorOrdenAlfabetico(ListView):
+    model = Emprendimientos
+    template_name = 'empr/categorias.html'
+    context_object_name = 'emprendimientos'
+    
+    def get_queryset(self):
+        orden = self.kwargs.get('orden')
+        
+        if orden == 'asc':
+            return Emprendimientos.objects.order_by('titulo')
+        elif orden == 'desc':
+            return Emprendimientos.objects.order_by('-titulo')
