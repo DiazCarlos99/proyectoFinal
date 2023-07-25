@@ -52,13 +52,15 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+                            <a class="nav-link" href="{% url 'contactos:contacto' %}">Contacto</a>
                         </li>
 
                     </ul>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        {%if user.is_staff%}
                         <a href="{%url 'empr:crear_empredimiento'%}" class="btn btn-outline-light btn-sm">Crear emprendimento</a>
+                        {%endif%}
                         <a href="{% url 'empr:crear_empredimiento' %}"><button type="button" class="btn btn-light btn-sm">{{ user.username }}</button></a>
                         <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary btn-sm">Salir</button></a>
                     </div>
@@ -79,7 +81,19 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'empr:listar_emprendimientos' %}">Emprendieminetos</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorías
+                            </a>
+                            <ul class="dropdown-menu">
+                                {%for categoria in cat_context%}
+                              <li><a class="dropdown-item" href="{%url 'empr:filtrar_emprendimientos' categoria.nombre%}">{{categoria.nombre}}</a></li>
+                                {%endfor%}
+                            </ul>
+                        </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'sobre_nosotros' %}">Sobre Nosotros</a>
                         </li>

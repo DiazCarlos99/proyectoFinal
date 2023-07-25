@@ -46,5 +46,7 @@ urlpatterns = [
     #url de empr
     path('emprendimientos/', include('apps.empr.urls')),
     
+    #url de contactos
+    path('contactos/', include('apps.contactos.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #sirve para acceder a los archivos media
 # Configuración para servir archivos estáticos en desarrollo

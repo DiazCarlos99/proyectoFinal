@@ -13,21 +13,40 @@ from .forms import Form_Alta,  Form_Modificacion
 from django.contrib.auth.mixins import LoginRequiredMixin
 #se importan los alert o mensajes
 from django.contrib import messages
-#redireccion a la misma pagina
+#controla que el user sea staff
+from django.contrib.auth.mixins    import UserPassesTestMixin
 
 
-class CrearEmpredimiento(LoginRequiredMixin, CreateView):
+class CrearEmpredimiento(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Emprendimientos
     form_class = Form_Alta 
     template_name = 'empr/crear.html' #nombre del template
     success_url = reverse_lazy('empr:listar_emprendimientos') #una vez creada la noticia a donde direcciona
 
+    def test_func(self):
+        return self.request.user.is_staff
+    
     def form_valid(self, form):
         emprendimiento = form.save(commit=False)
         emprendimiento.autor = self.request.user
         return super(CrearEmpredimiento, self).form_valid(form)
     
-class   ListarEmprendimientos(LoginRequiredMixin, ListView):
+        
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func():
+            # Si el usuario no tiene permiso, se muestra un mensaje de error
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
+    def handle_no_permission(self):
+        # Manejar el caso cuando el usuario no tiene los permisos necesarios
+        return render(self.request, 'error/403.html', {'mensaje': 'No tienes permiso para acceder a esta página.'}, status=403)
+
+    
+    
+
+    
+class   ListarEmprendimientos(ListView):
     model = Emprendimientos
     template_name = 'empr/listar.html' 
     context_object_name = 'emprendimientos_por_categoria'
@@ -46,15 +65,24 @@ def DetalleEmprendimientos(LoginRequiredMixin, request, pk):
 	return render(request, 'empr/detalles.html', ctx)
 '''
 
-class DetalleEmprendimientos(LoginRequiredMixin ,DetailView):
+class DetalleEmprendimientos(DetailView):
     model = Emprendimientos 
     template_name = 'empr/detalles.html'
 
     
-class EditarEmprendimientos(LoginRequiredMixin, UpdateView):
+class EditarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Emprendimientos
     form_class = Form_Modificacion
     template_name = 'empr/editar.html'
+
+        #FUNCION PARA DETERMINAR SI EL USUARIO ES STAFF
+    def test_func(self):
+        return self.request.user.is_staff
+    
+    def test_func_autor(self):
+        # Verifica si el usuario actual es el autor del emprendimiento
+        emprendimiento = self.get_object()
+        return self.request.user == emprendimiento.autor
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -71,13 +99,32 @@ class EditarEmprendimientos(LoginRequiredMixin, UpdateView):
         # Lógica de actualización del emprendimiento
         messages.success(self.request, 'El emprendimiento ha sido actualizado exitosamente.')
         return super().form_valid(form)
+    # Mensaje personalizado para el error de permisos
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func():
+            # Si el usuario no tiene permiso, se muestra un mensaje de error
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
+    def handle_no_permission(self):
+        # Manejar el caso cuando el usuario no tiene los permisos necesarios
+        return render(self.request, 'error/403.html', {'mensaje': 'No tienes permiso para acceder a esta página.'}, status=403)
+
 
      
-class EliminarEmprendimientos(LoginRequiredMixin, DeleteView):
+class EliminarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Emprendimientos
     template_name = 'empr/eliminar.html'
     success_url = reverse_lazy('empr:listar_emprendimientos')
 
+    def test_func(self):
+        return self.request.user.is_staff
+    
+    def test_func_autor(self):
+        # Verifica si el usuario actual es el autor del emprendimiento
+        emprendimiento = self.get_object()
+        return self.request.user == emprendimiento.autor
+    
     def delete(self, request, *args, **kwargs):
         # Obtenemos el emprendimiento que se va a eliminar
         emprendimiento = self.get_object()
@@ -88,7 +135,19 @@ class EliminarEmprendimientos(LoginRequiredMixin, DeleteView):
         # Redireccionamos a la página de listar con el ID del emprendimiento eliminado
         return redirect('empr:listar_emprendimientos', emprendimiento_id=emprendimiento.pk)
     
-class  FiltrarEmprendimientos(LoginRequiredMixin, ListView):
+    # Mensaje personalizado para el error de permisos
+    def dispatch(self, request, *args, **kwargs):
+        if not self.test_func():
+            # Si el usuario no tiene permiso, se muestra un mensaje de error
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
+    def handle_no_permission(self):
+        # Manejar el caso cuando el usuario no tiene los permisos necesarios
+        return render(self.request, 'error/403.html', {'mensaje': 'No tienes permiso para acceder a esta página.'}, status=403)
+
+    
+class  FiltrarEmprendimientos(ListView):
     model = Emprendimientos
     template_name = 'empr/filtrar.html'
     success_url = reverse_lazy('empr:filtrar_emprendimientos')
@@ -101,7 +160,7 @@ class  FiltrarEmprendimientos(LoginRequiredMixin, ListView):
         queryset = Emprendimientos.objects.filter(categoria__nombre=nombre)
         return queryset
     
-class Categorias(LoginRequiredMixin, ListView):
+class Categorias(ListView):
     model = Categoria
     template_name = 'empr/categorias.html'
     
@@ -130,3 +189,4 @@ class FiltrarPorOrdenAlfabetico(ListView):
             return Emprendimientos.objects.order_by('titulo')
         elif orden == 'desc':
             return Emprendimientos.objects.order_by('-titulo')
+        
