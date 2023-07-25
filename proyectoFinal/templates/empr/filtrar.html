@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/style_empr_listar.css'%}">
 
+{% endblock css %}
 
 {% block contenido %}
 	
@@ -7,19 +12,19 @@
     <div class="row mt-3">
       <div class="col-md-9 mx-auto mb-5">
       	<div class="row">
-      	{% for emprendimientos in object_list %}
+      	{% for emprendimiento in emprendimientos_filtrados %}
       		<div class="col-md-4">
                 
-            <a href="{% url 'empr:detalle_emprendimiento' emprendimientos.pk %}">
-      			<h4>CATEGORIA: {{emprendimientos.categoria}}</h4>
-      			<h4>TITULO: {{emprendimientos.titulo}}</h4>
-      			<h4>FECHA: {{emprendimientos.creado}}</h4>
-      			<img src="{{emprendimientos.imagen.url}}" width="200">
-      			<h4>AUTOR: {{emprendimientos.autor}}</h4>
+            <a href="{% url 'empr:detalle_emprendimiento' emprendimiento.pk %}">
+      			<h4>CATEGORIA: {{emprendimiento.categoria}}</h4>
+      			<h4>TITULO: {{emprendimiento.titulo}}</h4>
+      			<h4>FECHA: {{emprendimiento.creado}}</h4>
+      			<img src="{{emprendimiento.imagen.url}}" width="200">
+      			<h4>AUTOR: {{emprendimiento.autor}}</h4>
       			<hr>
             </a>
-            
       		</div>
+		</div>
       	{% endfor %}
       </div>
       </div>
