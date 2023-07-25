@@ -28,11 +28,14 @@
       						<p class="fecha">FECHA: {{emprendimientos.creado}}</p>
       				</div>
 				</div>
+				{%if emprendimientos.autor == user%}
 				<a href="{% url 'empr:editar_emprendimientos' emprendimientos.pk%}" class="btn btn-success text-center">editar</a>
 				<!-- Button trigger modal -->
 					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 						Eliminar
   					</button>
+				
+				{%endif%}
 				<!-- <a href="{%url 'empr:eliminar_emprendimiento' emprendimientos.pk%}" class="btn btn-info text-center">eliminar</a> -->
 				<!-- Modal -->
 				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
