@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style_crear.css'%}">
+{% endblock css %}
+{% block contenido %}
+
+<div class="base">
+  <form class="contenedor" action="" method="post" enctype="multipart/form-data">{% csrf_token %}         
+  <h3 class="mb-4">Editar emprendimiento: "{{object.titulo}}"</h3>
+    {{form.as_div}}
+    <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
+  </form>
+</div>
+{% endblock contenido %}

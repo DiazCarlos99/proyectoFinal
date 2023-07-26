@@ -1,0 +1,119 @@
+/*
+=============== 
+Fonts
+===============
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
+
+body{
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(rgba(111,42,243,0.5), rgba(111,42,243,0.2)) ,url("../img/fondo.jpg");
+  background-size:cover;
+}
+a{
+  text-decoration: none;
+}
+.titulo, .autor{
+  color: black;
+}
+.categoria{
+  color:red;
+}
+/*
+/*
+nav
+*/
+nav{
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.estlogo{
+  width: 200px;
+  border-radius: 10px;
+}
+/*
+Container // carrusel de imagenes
+*/
+.container{
+  margin-top: 3rem;
+  
+}
+
+.tamaño{
+  height: 200px;
+}
+
+  .container .carousel {
+    max-width: 100%;
+    margin: 0 auto; 
+  }
+  
+  .container .carousel img {
+    max-width: 100%;
+    height: auto;
+  }
+/*
+Article // numeros
+*/
+
+.contador {
+  background: #e7e8e9;
+  padding: 1rem 1rem;
+  border-radius: 0.25rem;
+  border-bottom: 4px solid transparent;
+  margin: 25px;
+}
+
+article span {
+  font-size: 2.5rem;
+  
+  line-height: 1.25;
+}
+
+article p {
+  margin: 0;
+  text-transform: capitalize;
+  font-size: 1.3rem;
+}
+
+article:nth-of-type(1) {
+  border-bottom-color: #f59e0b;
+  max-width: 70%;
+  overflow: hidden;
+}
+article:nth-of-type(2) {
+  border-bottom-color: #14b8a6;
+  max-width: 70%;
+  overflow: hidden;
+}
+article:nth-of-type(3) {
+  border-bottom-color: #5140ec;
+  max-width: 70%;
+  overflow: hidden;
+}
+/*emprendimientos*/
+.titulo-empr{
+  color: #e7e8e9;
+  padding: 1rem;
+  margin: 4rem;
+  width: auto;
+  border-bottom: solid #f59e0b;
+}
+/*footer*/
+
+footer{
+  background: black;
+  display: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+}
+
+footer p{
+  color: white;
+  padding: 3px;
+}
+

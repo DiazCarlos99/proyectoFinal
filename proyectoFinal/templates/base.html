@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block css %}
+        {% endblock css %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+        <title>InfoBlog</title>
+    </head>
+    <body>
+
+        {% if user.is_authenticated %}
+
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #6F2AF3;">
+            <div class="container-fluid">
+                <!-- Acá está el logo de nuestro blog -->
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/InfoBlog_Logo.png'%}" alt="Bootstrap" class="estlogo">
+                </a>
+                <a class="navbar-brand mb-0 h1 fw-bold" href="{% url 'home' %}" >Inicio</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'empr:listar_emprendimientos' %}">Emprendieminetos</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorías
+                            </a>
+                            <ul class="dropdown-menu">
+                                {%for categoria in cat_context%}
+                              <li><a class="dropdown-item" href="{%url 'empr:filtrar_emprendimientos' categoria.nombre%}">{{categoria.nombre}}</a></li>
+                                {%endfor%}
+                            </ul>
+                        </li> 
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sobre_nosotros' %}">Sobre Nosotros</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contactos:contacto' %}">Contacto</a>
+                        </li>
+
+                    </ul>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        {%if user.is_staff%}
+                        <a href="{%url 'empr:crear_empredimiento'%}" class="btn btn-outline-light btn-sm">Crear emprendimento</a>
+                        {%endif%}
+                        <a href="{% url 'empr:crear_empredimiento' %}"><button type="button" class="btn btn-light btn-sm">{{ user.username }}</button></a>
+                        <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary btn-sm">Salir</button></a>
+                    </div>
+
+        {% else %}
+
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #6F2AF3;">
+            <div class="container-fluid">
+                <!-- Acá está el logo de nuestro blog -->
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'img/InfoBlog_Logo.png'%}" alt="Bootstrap" class="estlogo">
+                </a>
+                <a class="navbar-brand mb-0 h1 fw-bold" href="{% url 'home' %}" >Inicio</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'empr:listar_emprendimientos' %}">Emprendieminetos</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorías
+                            </a>
+                            <ul class="dropdown-menu">
+                                {%for categoria in cat_context%}
+                              <li><a class="dropdown-item" href="{%url 'empr:filtrar_emprendimientos' categoria.nombre%}">{{categoria.nombre}}</a></li>
+                                {%endfor%}
+                            </ul>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sobre_nosotros' %}">Sobre Nosotros</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+                        </li>
+
+                    </ul>                    
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'login' %}"><button type="button" class="btn btn-light btn-sm">Ingresar</button></a>
+                        <a href="{% url 'usuarios:registrar' %}"><button type="button" class="btn btn-secondary btn-sm">Registrarse</button></a>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </nav>
+        
+       {% block contenido %}
+
+       {% endblock contenido %}
+
+       <footer><p>Este es el pie de pagina</p></footer>
+       {%block script%}
+       {%endblock script%}
+       {% autoescape off %}
+       <script src="{%static 'js/swiper-bundle.min.js'%}"></script>
+       <script src="{% static 'js/app1.js'%}"></script>
+       
+       {% endautoescape %}
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </body>
+</html>
+		
+		
