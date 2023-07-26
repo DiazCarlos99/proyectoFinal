@@ -23,7 +23,7 @@
           {%else%}
             {% for categoria in cat_context%}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-              <img src="{{categoria.imagen.url}}" class="d-block w-100" alt="comercial">
+              <img src="{{categoria.imagen.url}}" class="filtro d-block w-100" alt="comercial">
               <div class="carousel-caption d-none d-md-block ">
                   <h5>{{categoria.nombre}}</h5>
                   <p>{{categoria.resumen}}</p>
@@ -78,9 +78,9 @@
             <div class="slide-content">
               <div class="card-wrapper swiper-wrapper">
                 {%for emprendimimento in empr_context%}
-                <div class="card swiper-slide">
+                <div class="card swiper-slide" style="border: none;">
                   <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
-                  <div class="img-content">
+                  <div class="img-content" style="background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)) ,url({{emprendimimento.imagen.url}}); background-size: cover;">
                     <img src="{{emprendimimento.imagen.url}}" alt="foto">
                   </div>
                   <div class="card-content">

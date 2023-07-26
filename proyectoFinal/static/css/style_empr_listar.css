@@ -23,6 +23,9 @@
     color: white;
   }
 
+.filtro{
+  filter: brightness(50%);
+}
 
 /*>>>>>>> ce03856f6a7ebda84eb960fc8b6ea70a0e37cdbe*/
 
@@ -59,8 +62,7 @@
   }
 
   .img-content img{
-    max-width: 1120px;
-    width: 100%;
+    max-width: 100%;
     height: 200px
   }
 
@@ -136,6 +138,7 @@
       display: none;
     }
   }
+
 
 
 
