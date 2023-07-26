@@ -17,19 +17,23 @@ class PrimerContacto(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('contactos:contacto') 
     
     def form_valid(self, form):
-        # guardar el formulario
-        contacto = form.save()
-        
-        #enviar correo
-        subject = 'Confirmación de contacto'
-        message = 'HEMOS RECIBIDO SU MENSAJE CON ÉXITO. MUY PRONTO NOS PONDREMOS EN CONTACTO CON USTED.'
-        from_email = 'tu_correo_electronico'
-        recipient_list = [contacto.email]
-        
-        send_email = [subject, message, from_email, recipient_list]
-        
-        
-        # si da ok. se envia el siguiente mensaje
-        messages.success(self.request, 'Se ha enviado el mensaje con exito.')
-        return super().form_valid(form)
-    
+        if form.is_valid():    
+            form.instance.usuario = self.request.user
+            # guardar el formulario
+            contacto = form.save()
+
+            #enviar correo
+            subject = 'Confirmación de contacto'
+            message = 'HEMOS RECIBIDO SU MENSAJE CON ÉXITO. MUY PRONTO NOS PONDREMOS EN CONTACTO CON USTED.'
+            from_email = 'tu_correo_electronico'
+            recipient_list = [contacto.email]
+
+            send_email = [subject, message, from_email, recipient_list]
+
+
+            # si da ok. se envia el siguiente mensaje
+            messages.success(self.request, 'Se ha enviado el mensaje con exito.')
+            return super().form_valid(form)
+        else:
+            # Si el formulario no es válido, volver a mostrarlo con los errores
+            return self.form_invalid(form)
