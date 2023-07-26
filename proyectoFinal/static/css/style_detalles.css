@@ -1,0 +1,76 @@
+.base{
+    display: flex;
+    justify-content: center;
+    background:linear-gradient(rgba(111,42,243,0.3), rgba(0,0,0,0.9)), url("../img/login/fondo1.jpg");
+    background-size: cover;
+    height: 100%;
+    padding: 40px;
+}
+
+.contenedor{
+    max-width: 60%;
+    min-width: 400px;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 20px;
+    border: solid;
+    border-radius: 8px;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.detalles{
+    text-align: center;
+}
+
+.resumen{
+    margin-top: 40px;
+}
+
+.titulos{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+}
+
+.cont{
+    padding: 20px;
+    border: solid;
+    border-radius: 8px;
+    border-color: rgba(255, 255, 255, 0.2);    
+    
+}
+
+.cont-img{
+    height: 250px;
+}
+
+.img-empr{
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%; 
+}
+
+.contenido{
+    text-align: justify;
+    margin-top: 20px;
+}
+
+.info{
+    display: flex;
+    justify-content: space-between;
+    border: solid;
+    border-radius: 8px;
+    border-color: rgba(255, 255, 255, 0.2);
+    margin: 20px 0px; 
+    padding: 20px;
+}
+
+.autores, .categorias, .fecha{
+    margin: 0;
+}
+
+.botones{
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,60 +1,69 @@
 {% extends 'base.html' %}
 {% block css%}
+{% load static %}
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/style_detalles.css'%}">
 {%endblock%}
 {% block contenido %}
 
-<div class="container"> 
-	<!-- Aquí puedes mostrar los detalles del emprendimiento si es necesario -->
+<div class="base">
+		<div class="mensaje">
+			{%for mensaje in messages%}
+			<div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong>Bien hecho!</strong> {{ mensaje }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			{%endfor%}
+		</div>
 
-	{%for mensaje in messages%}
-	<div class="alert alert-success alert-dismissible fade show" role="alert">
-		<strong>Bien hecho!</strong> {{ mensaje }}
-		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-	  </div>
-	{%endfor%}
-	<!--aqui termina el mensaje-->
-    <div class="row mt-3">
-      	<div class="col-md-9 mx-auto mb-5">
-				<div class="row">
-      				<div class="col-md-9 text-center">
-							<h1 class="text-center titulo">{{emprendimientos.titulo}}</h1>
-
-      						<img src="{{emprendimientos.imagen.url}}" width="200" style="margin-bottom:30px">
-      						<p class="autor text-center">AUTOR: {{emprendimientos.autor}}</p>
-							<h3>{{emprendimientos.resumen}}</h3>
-                            <p class="autor text-center">{{emprendimientos.contenido}}</p>
-							<p class="categoria">CATEGORIA: {{emprendimientos.categoria}}</p>
-      						<p class="fecha">FECHA: {{emprendimientos.creado}}</p>
-      				</div>
+	<div class="contenedor">
+		<div class="detalles">
+			<h1 class="titulos">{{emprendimientos.titulo}}</h1>
+			<h4 class="resumen">{{emprendimientos.resumen}}</h4>
+			<div class="cont">
+				<div class="cont-img">
+					<img class="img-empr" src="{{emprendimientos.imagen.url}}" alt="foto de emprendimiento">
+				</div>			
+				<p class="contenido">{{emprendimientos.contenido}}</p>
+				<div class="botones">
+					{%if emprendimientos.autor == user%}
+						<a href="{% url 'empr:editar_emprendimientos' emprendimientos.pk%}" class="btn btn-outline-primary text-center">editar</a>
+						<!-- Button trigger modal -->
+							<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								Eliminar
+							  </button>
+						
+						{%endif%}
+						<!-- <a href="{%url 'empr:eliminar_emprendimiento' emprendimientos.pk%}" class="btn btn-info text-center">eliminar</a> -->
+						<!-- Modal -->
+						<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								  <div class="modal-content">
+									<div class="modal-body">
+										  <p>Estas seguro que desa eliminar: <strong>"{{emprendimientos.titulo}}"?</strong></p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button class="btn btn-danger" id="eliminar-btn">Eliminar</button>
+									</div>
+								  </div>
+							</div> 
+						  </div>
 				</div>
-				{%if emprendimientos.autor == user%}
-				<a href="{% url 'empr:editar_emprendimientos' emprendimientos.pk%}" class="btn btn-success text-center">editar</a>
-				<!-- Button trigger modal -->
-					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-						Eliminar
-  					</button>
-				
-				{%endif%}
-				<!-- <a href="{%url 'empr:eliminar_emprendimiento' emprendimientos.pk%}" class="btn btn-info text-center">eliminar</a> -->
-				<!-- Modal -->
-				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					<div class="modal-dialog">
-	  					<div class="modal-content">
-							<div class="modal-body">
-		  						<p>Estas seguro que desa eliminar: <strong>"{{emprendimientos.titulo}}"?</strong></p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-								<button class="btn btn-danger" id="eliminar-btn">Eliminar</button>
-							</div>
-	  					</div>
-					</div> 
-  				</div>
-		  		
-      	</div>
-  	</div> 
-</div>
+			</div>
+			<div class="info">
+				<p class="autores">AUTOR: {{emprendimientos.autor}}</p>
+				<p class="categorias">CATEGORIA: {{emprendimientos.categoria}}</p>
+				<p class="fecha">FECHA: {{emprendimientos.creado}}</p>
+			</div>
+			<!-- Acá van a ir los comentarios -->
+			<div class="comentarios">
+
+			</div>
+		</div>
+	</div>
+</div> 
 
 {% endblock contenido %}
 {%block script%}
@@ -79,5 +88,6 @@
         });
     });
 </script>
-  
+
+
   {%endblock script%}
