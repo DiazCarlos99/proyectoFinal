@@ -8,7 +8,8 @@
 {% block contenido %}
 
 <div class="base">
-		<div class="mensaje">
+	<div class="contenedor">
+		<div class="mensaje text-center">
 			{%for mensaje in messages%}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
 				<strong>Bien hecho!</strong> {{ mensaje }}
@@ -16,8 +17,6 @@
 			</div>
 			{%endfor%}
 		</div>
-
-	<div class="contenedor">
 		<div class="detalles">
 			<h1 class="titulos">{{emprendimientos.titulo}}</h1>
 			<h4 class="resumen">{{emprendimientos.resumen}}</h4>
