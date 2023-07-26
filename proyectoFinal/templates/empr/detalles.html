@@ -37,19 +37,7 @@
 						{%endif%}
 						<!-- <a href="{%url 'empr:eliminar_emprendimiento' emprendimientos.pk%}" class="btn btn-info text-center">eliminar</a> -->
 						<!-- Modal -->
-						<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								  <div class="modal-content">
-									<div class="modal-body">
-										  <p>Estas seguro que desa eliminar: <strong>"{{emprendimientos.titulo}}"?</strong></p>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-										<button class="btn btn-danger" id="eliminar-btn">Eliminar</button>
-									</div>
-								  </div>
-							</div> 
-						  </div>
+						
 				</div>
 			</div>
 			<div class="info">
@@ -64,7 +52,19 @@
 		</div>
 	</div>
 </div> 
-
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-body">
+				  <p>Estas seguro que desa eliminar: <strong>"{{emprendimientos.titulo}}"?</strong></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button class="btn btn-danger" id="eliminar-btn">Eliminar</button>
+			</div>
+		  </div>
+	</div> 
+  </div>
 {% endblock contenido %}
 {%block script%}
 <script>
