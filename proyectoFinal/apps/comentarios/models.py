@@ -1,32 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
+from apps.empr.models import Emprendimientos
 from django.utils import timezone
 from datetime import timedelta
 # Create your models here.
 
-class Categoria(models.Model):
-    nombre = models.CharField(max_length=80)
-    imagen = models.ImageField(upload_to='categorias')
-    resumen = models.TextField()
-    
-    def __str__(self):
-        return self.nombre
-    
-class Emprendimientos(models.Model):
+class Comentarios(models.Model):
     creado = models.DateTimeField(
-		'creado',
-		auto_now_add=True
-	)
+        'creado',
+        auto_now=True
+    )
+    
     modificado = models.DateTimeField(
-		'modificado',
-		auto_now=True
-	)
-    titulo = models.CharField(max_length=80)
-    resumen = models.TextField()
-    contenido = models.TextField()
-    autor = models.ForeignKey(User, on_delete = models.CASCADE)
-    imagen = models.ImageField(upload_to= 'empr')
-    categoria = models.ForeignKey(Categoria, on_delete = models.CASCADE)
+        'modificado',
+        auto_now=True
+    )
+    
+    texto = models.TextField(max_length = 1000)
+    estado = models.BooleanField(default=False)
+    usuario = models.ForeignKey(User, on_delete = models.CASCADE)
+    emprendimiento = models.ForeignKey(Emprendimientos, on_delete = models.CASCADE)
     
     def get_creado_naturaltime(self):
         now = timezone.now()
@@ -45,10 +38,6 @@ class Emprendimientos(models.Model):
             return f'hace {days} días'
         else:
             return self.creado.strftime('%d de %B de %Y a las %H:%M')
-        
-    
-    def MisComentarios(self):
-        return self.comentarios_set.all()
     
     def __str__(self):
-        return self.titulo
+        return self.texto

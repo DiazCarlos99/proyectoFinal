@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.empr',
     'apps.contactos',
+    'apps.comentarios',
+    'django.contrib.humanize',
     
 ]
 

@@ -2,6 +2,7 @@
 {% block css%}
 {% load static %}
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="{% static 'css/style_detalles.css'%}">
 {%endblock%}
@@ -12,7 +13,7 @@
 		<div class="mensaje text-center">
 			{%for mensaje in messages%}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<strong>Bien hecho!</strong> {{ mensaje }}
+				 {{ mensaje }}
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 			{%endfor%}
@@ -29,7 +30,7 @@
 					{%if emprendimientos.autor == user%}
 						<a href="{% url 'empr:editar_emprendimientos' emprendimientos.pk%}" class="btn btn-outline-primary text-center">editar</a>
 						<!-- Button trigger modal -->
-							<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+							<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
 								Eliminar
 							  </button>
 						
@@ -42,7 +43,7 @@
 			<div class="info">
 				<p class="autores">AUTOR: {{emprendimientos.autor}}</p>
 				<p class="categorias">CATEGORIA: {{emprendimientos.categoria}}</p>
-				<p class="fecha">FECHA: {{emprendimientos.creado}}</p>
+				<p class="fecha">FECHA: {{emprendimientos.get_creado_naturaltime}}</p>
 			</div>
 			<!-- Acá van a ir los comentarios -->
 			<div class="comentarios">
@@ -50,6 +51,7 @@
 					<h1>Comentarios</h1>
 			
 					<ul id="comments-list" class="comments-list">
+						{%for com in emprendimientos.MisComentarios%}
 						<li>
 							<div class="comment-main-level">
 								<!-- Avatar -->
@@ -58,60 +60,64 @@
 								<!-- Contenedor del Comentario -->
 								<div class="comment-box">
 									<div class="comment-head">
-										<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-										<span>hace 20 minutos</span>
+										<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{com.usuario}}</a></h6>
+										<span>{{com.get_creado_naturaltime }}</span>
 										<div class="comentarios-enlaces">
-											<a href="#" class="">Editar</a>
-										<a href="#" class="">Eliminar</a>
+											<a href="#" >Editar</a>
+											<a href="#" class="abrir-modal" data-comentario-id="{{ com.pk }}" data-bs-toggle="modal" data-bs-target="#modal1">Eliminar</a>
 										</div>
 									</div>
 									<div class="comment-content">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+										{{com.texto}}
 									</div>
 								</div>
 							</div>
 							<!-- Respuestas de los comentarios -->
 						</li>
-			
-						<li>
-							<div class="comment-main-level">
-								<!-- Avatar -->
-								<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
-								<!-- Contenedor del Comentario -->
-								<div class="comment-box">
-									<div class="comment-head">
-										<h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-										<span>hace 10 minutos</span>
-										<div class="comentarios-enlaces">
-											<a href="#" class="">Editar</a>
-										<a href="#" class="">Eliminar</a>
-										</div>
-									</div>
-									<div class="comment-content">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-									</div>
-								</div>
-							</div>
+						{%endfor%}
+						{% if user.is_authenticated %}
+						<li> 
+							<form action="{% url 'comentarios:crear_comentario' emprendimientos.pk %}" method="post" id="comentario-form">
+								{% csrf_token %}
+								<textarea type="text" class="comentarios-textarea" name="comentario"></textarea>
+								<button type="submit" class="btn btn-outline-primary text-center">Enviar comentario</button>
+							</form>
 						</li>
+						{%endif%}
 					</ul>
-					
+
 				</div>
-				<a href="#" class="comentar">Realizar un comentario</a>
+				
 			</div><!--Fin Comentarios-->
 			
 		</div>
 		
 	</div>
-</div> 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+</div>
+  <!--modal eliminar emprendimiento-->
+<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		  <div class="modal-content">
+		<div class="modal-content">
 			<div class="modal-body">
 				  <p>Estas seguro que desa eliminar: <strong>"{{emprendimientos.titulo}}"?</strong></p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
 				<button class="btn btn-danger" id="eliminar-btn">Eliminar</button>
+			</div>
+		</div>
+	</div> 
+</div>
+  <!--modal eliminar comentario-->
+  <div class="modal fade" id="modal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-body">
+				  <p>Estas seguro que desa eliminar este comentario?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button class="btn btn-danger" id="eliminar-comentario">Eliminar</button>
 			</div>
 		  </div>
 	</div> 
@@ -119,7 +125,9 @@
 {% endblock contenido %}
 {%block script%}
 <script>
+	
     $(document).ready(function() {
+		//elminar articulo
         $("#eliminar-btn").on("click", function() {
             // Realizamos una solicitud POST al servidor para eliminar el emprendimiento
             $.ajax({
@@ -137,6 +145,75 @@
                 }
             })
         });
+		//fin eliminar articulo
+		//crear comentario
+		$("#comentario-form").on("submit", function(event) {
+			event.preventDefault();
+			// Obtener el texto del comentario
+            var comentario = $("#comentario-form textarea").val().trim();
+
+            // Verificar si el comentario está vacío
+            if (comentario === "") {
+                alert("Por favor, ingresa un comentario antes de enviarlo.");
+                return;
+            }
+			// Realizamos una solicitud POST al servidor para crear el comentario
+			$.ajax({
+				type: "POST",
+				url: $(this).attr('action'),
+				data: $(this).serialize(),
+				dataType: 'json',
+				success: function(data) {
+					// Redireccionamos o actualizamos la página, si es necesario, con el ID del comentario recién creado
+					window.location.reload(); // Puedes personalizar esto según tu necesidad
+				},
+				error: function() {
+					alert("Error al crear el comentario.");
+				}
+			});
+		});
+		//fin crear comentario
+		//eliminar comentario
+		// Variable global para almacenar el ID del comentario a eliminar
+		var comentarioIdToDelete;
+
+		// Escucha el evento de clic para el botón "Eliminar" dentro del modal
+		$(".abrir-modal").on("click", function(event) {
+    		event.preventDefault();
+
+    	// Obtener el ID del comentario desde el atributo data-comentario-id
+    	comentarioIdToDelete = $(this).data("comentario-id");
+
+    	// Actualizar el atributo data-comentario-id del botón "Eliminar" dentro del modal
+    	$("#eliminar-comentario").data("comentario-id", comentarioIdToDelete);
+		});
+	
+		// Evento de clic para el botón "Eliminar" dentro del modal
+		$("#eliminar-comentario").on("click", function() {
+    	// Obtener el ID del comentario desde el atributo data-comentario-id del botón
+    	var comentarioId = $(this).data("comentario-id");
+
+    	// Realizar una solicitud AJAX para eliminar el comentario
+    	$.ajax({
+        type: "POST",
+        url: "{% url 'comentarios:eliminar_comentario' %}",
+        data: {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            comentario_id: comentarioId
+        },
+        success: function(data) {
+            // Si se eliminó correctamente, puedes actualizar la página o realizar otras acciones
+            // Por ejemplo, si deseas actualizar la lista de comentarios, puedes recargar la página
+            location.reload();
+        },
+        error: function() {
+            alert("Error al eliminar el comentario.");
+        }
+    	});
+		//fin eliminar comentario
+});
+
+
     });
 </script>
 

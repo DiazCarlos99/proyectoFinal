@@ -48,5 +48,8 @@ urlpatterns = [
     
     #url de contactos
     path('contactos/', include('apps.contactos.urls')),
+    
+    path('comentarios/', include('apps.comentarios.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #sirve para acceder a los archivos media
 # Configuración para servir archivos estáticos en desarrollo

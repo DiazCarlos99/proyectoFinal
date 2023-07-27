@@ -1,4 +1,5 @@
 from apps.empr.models import Categoria, Emprendimientos, User
+from apps.comentarios.models import Comentarios
 from django.db.models import Count
 # Obtener categorías que tienen emprendimientos asociados
 
