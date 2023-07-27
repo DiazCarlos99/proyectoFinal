@@ -4,12 +4,19 @@ Fonts
 ===============
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
-
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 body{
   padding: 0;
   margin: 0;
   background: linear-gradient(rgba(111,42,243,0.5), rgba(111,42,243,0.2)) ,url("../img/fondo.jpg");
   background-size:cover;
+  font-family: 'Roboto', 'Open Sans', Arial, Helvetica, Sans-serif, Verdana;
 }
 a{
   text-decoration: none;
@@ -117,3 +124,109 @@ footer p{
   padding: 3px;
 }
 
+
+
+a {
+  color: #03658c;
+  text-decoration: none;
+}
+
+ul {
+ list-style-type: none;
+}
+
+
+/* Estilos generales */
+.comments-container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.comment-box{
+  display: block;
+  
+}
+.comment-avatar{
+ margin-right: 5px;
+}
+.comment-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+  
+}
+
+.comment-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-name {
+  font-weight: bold;
+}
+
+.comment-content {
+  font-size: 15px;
+  color: #595959;
+  margin-top: 10px;
+}
+.comment-main-level{
+  display: flex;
+  margin-bottom: 0.85rem;
+  padding: 10px;
+  border-style: solid;
+  border-color: hsl(204, 8%, 88%);
+  border-radius: 10px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.comentar{
+  padding: 1.2rem;
+  margin-bottom: 30px;
+  border: solid green;
+  border-radius: 10px;
+  color: green;
+}
+.comentarios-enlaces{
+  font-size: 0.8rem;
+  padding: 5px;
+}
+.comentarios-enlaces a:nth-of-type(1){
+  color:blue;
+  margin-right: 3px;
+}
+.comentarios-enlaces a:nth-of-type(2){
+  color:red;
+}
+.comentar:hover{
+  background-color: green;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Estilos para pantallas pequeñas (Responsive) */
+@media only screen and (max-width: 480px) {
+  .comments-container {
+    padding: 10px;
+  }
+
+  .comment-avatar img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comment-head {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .comment-head i {
+    font-size: 12px;
+  }
+
+  .comment-content {
+    font-size: 14px;
+  }
+}
