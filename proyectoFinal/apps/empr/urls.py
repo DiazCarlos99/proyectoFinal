@@ -18,7 +18,7 @@ urlpatterns = [
     
     path('Filtrar/<str:nombre>', views.FiltrarEmprendimientos.as_view(), name="filtrar_emprendimientos"),
     
-    path('Filtrar/categorias/', views.Categorias.as_view(), name="emprendimientos_categorias"),
+    #path('Filtrar/categorias/', views.Categorias.as_view(), name="emprendimientos_categorias"),
     
     path('Filtrar/antiguedad/<str:orden>/', views.FiltrarPorAntiguedad.as_view(), name='emprendimiento_antiguedad'),
     

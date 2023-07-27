@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
 from django.urls import reverse_lazy
 
-from .models import Emprendimientos, Categoria
+from .models import Emprendimientos
 from .forms import Form_Alta,  Form_Modificacion
 
 #CONTROLA SI EL USUARIO ESTA LOGEADO
@@ -16,6 +16,7 @@ from django.contrib import messages
 #controla que el user sea staff
 from django.contrib.auth.mixins    import UserPassesTestMixin
 
+from django.db.models import Func, F
 
 class CrearEmpredimiento(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Emprendimientos
@@ -160,26 +161,23 @@ class  FiltrarEmprendimientos(ListView):
         queryset = Emprendimientos.objects.filter(categoria__nombre=nombre)
         return queryset
     
-class Categorias(ListView):
-    model = Categoria
-    template_name = 'empr/categorias.html'
     
 class FiltrarPorAntiguedad(ListView):
     model = Emprendimientos
-    template_name = 'empr/categorias.html'
+    template_name = 'empr/filtrar-orden.html'
     context_object_name = 'emprendimientos'
     
     def get_queryset(self):
         orden = self.kwargs.get('orden')
         
         if orden == 'asc':
-            return Emprendimientos.objects.order_by('creado')
+            return Emprendimientos.objects.annotate(creado_date=Func(F('creado'), function='date')).order_by('-creado_date')
         elif orden == 'desc':
-            return Emprendimientos.objects.order_by('-creado')
+            return Emprendimientos.objects.annotate(creado_date=Func(F('creado'), function='date')).order_by('creado_date')
         
 class FiltrarPorOrdenAlfabetico(ListView):
     model = Emprendimientos
-    template_name = 'empr/categorias.html'
+    template_name = 'empr/filtrar-orden.html'
     context_object_name = 'emprendimientos'
     
     def get_queryset(self):
