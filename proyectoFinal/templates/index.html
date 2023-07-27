@@ -15,8 +15,8 @@
           {%if not cat_context%}
           <div class="carousel-item active">
             <img src="{% static 'img/empr/comercio.jpg'%}" style="width: 100%" class="d-block w-100" alt="comercial">
-            <div class="carousel-caption d-none d-md-block ">
-                <h5>Emprendimiento Comercial</h5>
+            <div class="carousel-caption d-none d-md-block "> 
+              <h5>Emprendimiento Comercial</h5>
                 <p>Negocios que se dedican a la venta de bienes o servicios al consumidores.</p>
               </div>
           </div>
@@ -25,8 +25,9 @@
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
               <img src="{{categoria.imagen.url}}" class="filtro d-block w-100" alt="comercial">
               <div class="carousel-caption d-none d-md-block ">
-                  <h5>{{categoria.nombre}}</h5>
-                  <p>{{categoria.resumen}}</p>
+                <a href="#" style="color:white;">   
+                <h2>{{categoria.nombre}}</h2>
+                  <p>{{categoria.resumen}}</p></a>
                 </div>
             </div>
             {%endfor%}
