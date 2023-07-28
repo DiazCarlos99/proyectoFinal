@@ -225,3 +225,24 @@ ul {
     font-size: 14px;
   }
 }
+
+.formulario-contenedor{
+  display: flex;
+  width: 140vh;
+}
+
+.formulario-contacto{
+  margin-right: 2rem;
+}
+
+.formulario-mapa{
+  margin-left: 2rem;
+  border-radius: 10px;
+  border: solid;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.formulario-mapa iframe{
+  border-radius: 8px;
+  margin: 2px;
+  margin-bottom: 0;
+}
