@@ -50,3 +50,60 @@ var swiper = new Swiper(".slide-content", {
   },
 });
 
+// Obtener el formulario y los campos de correo y mensaje por su id
+        const formulario = document.querySelector('#formulario');
+        const campoCorreo = document.getElementById('id_email');
+        const campoMensaje = document.getElementById('id_mensaje');
+
+        // Agregar un evento de escucha para la presentación del formulario
+        formulario.addEventListener('submit', function(event) {
+            // Verificar si el campo de correo está vacío o no es un correo válido
+            if (campoCorreo.value.trim() === '' || !isValidEmail(campoCorreo.value)) {
+                //alert('Por favor, ingrese un correo electrónico válido.');
+                showAlert('Por favor, ingrese un correo electrónico válido.');
+                e.preventDefault(); // Detener el envío del formulario
+                return;
+            }
+
+            // Verificar si el campo de mensaje está vacío
+            if (campoMensaje.value.trim() === '') {
+                //alert('Por favor, ingrese un mensaje.');
+                showAlert('Por favor, ingrese un mensaje.');
+                event.preventDefault(); // Detener el envío del formulario
+                return;
+            }
+        });
+
+        // Función para verificar si el correo es válido
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+//alert
+
+// Función para cerrar el alert personalizado
+// Función para mostrar el alert personalizado
+function showAlert(message) {
+  const customAlert = document.getElementById('custom-alert');
+  const alertMessage = document.getElementById('alert-message');
+
+  alertMessage.textContent = message;
+  customAlert.style.display = 'block';
+  customAlert.style.zIndex = 10;
+
+
+  // Ocultar el alert después de unos segundos (opcional)
+  setTimeout(function() {
+    closeAlert();
+  }, 3000); // Cierra el alert después de 3 segundos (puedes ajustar el tiempo según tus necesidades)
+}
+
+// Función para cerrar el alert personalizado
+function closeAlert() {
+  const customAlert = document.getElementById('custom-alert');
+  customAlert.style.display = 'none';
+}
+
+
+

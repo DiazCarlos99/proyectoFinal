@@ -7,17 +7,21 @@
 {% endblock css %}
 
 {% block contenido %}
-{%for mensaje in messages%}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Bien hecho!</strong> {{ mensaje }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div id="custom-alert" class="custom-alert">
+    <span class="close-btn" onclick="closeAlert()">&times;</span>
+    <p id="alert-message"></p>
   </div>
- 
-{%endfor%}
+  {%for mensaje in messages%}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Bien hecho!</strong> {{ mensaje }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {%endfor%}
     <div class="base">
+
         <div class="formulario-contenedor">
             <div class="formulario-contacto">
-                <form method="POST" class="contenedor">{%csrf_token%}
+                <form method="POST" class="contenedor" id="formulario">{%csrf_token%}
                     <h3 class="mb-4">CONTACTATE CON NOSOTROS</h3>
                     {{form.as_div}}
                     <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>

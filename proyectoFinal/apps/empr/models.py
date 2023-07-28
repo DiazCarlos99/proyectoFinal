@@ -18,7 +18,7 @@ class Emprendimientos(models.Model):
 		auto_now_add=True
 	)
     modificado = models.DateTimeField(
-		'modificado',
+		'modificado', 
 		auto_now=True
 	)
     titulo = models.CharField(max_length=80)
@@ -46,6 +46,24 @@ class Emprendimientos(models.Model):
         else:
             return self.creado.strftime('%d de %B de %Y a las %H:%M')
         
+    def get_modificado_naturaltime(self):
+        now = timezone.now()
+        diff = now - self.modificado
+        print(diff)
+        
+        if diff < timedelta(minutes=1):
+            return 'hace unos segundos'
+        elif diff < timedelta(hours=1):
+            minutes = diff.seconds // 60
+            return f'hace {minutes} minutos'
+        elif diff < timedelta(days=1):
+            hours = diff.seconds // 3600
+            return f'hace {hours} horas'
+        elif diff < timedelta(days=30):
+            days = diff.days
+            return f'hace {days} días'
+        else:
+            return self.creado.strftime('%d de %B de %Y a las %H:%M')
     
     def MisComentarios(self):
         return self.comentarios_set.all()

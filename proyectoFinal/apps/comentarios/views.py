@@ -34,7 +34,7 @@ class CrearComentario(View, LoginRequiredMixin):
             emprendimiento = Emprendimientos.objects.get(id=pk)
             
             comentario = Comentarios.objects.create(texto=com, usuario=usuario, emprendimiento=emprendimiento)
-            messages.success(request, 'Comentario elimimnado con exito!.')
+            messages.success(request, 'Comentario creado con exito!.')
             
             # Devolvemos una respuesta JSON con los detalles del comentario recién creado
             data = {

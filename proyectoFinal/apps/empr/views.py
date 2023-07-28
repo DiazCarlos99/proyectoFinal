@@ -1,10 +1,12 @@
 from typing import Any 
 from django.db.models.query import QuerySet
+from django.dispatch import receiver
+from django.db.models.signals import pre_delete
 from django.shortcuts import render, redirect
-
+import os
 # Create your views here.
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 
 from .models import Emprendimientos
 from .forms import Form_Alta,  Form_Modificacion
@@ -22,16 +24,20 @@ class CrearEmpredimiento(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Emprendimientos
     form_class = Form_Alta 
     template_name = 'empr/crear.html' #nombre del template
-    success_url = reverse_lazy('empr:listar_emprendimientos') #una vez creada la noticia a donde direcciona
 
+    def get_success_url(self):
+        return reverse('empr:detalle_emprendimiento', kwargs={'pk': self.object.pk})
+    
     def test_func(self):
         return self.request.user.is_staff
     
     def form_valid(self, form):
         emprendimiento = form.save(commit=False)
         emprendimiento.autor = self.request.user
-        return super(CrearEmpredimiento, self).form_valid(form)
-    
+        emprendimiento.save()
+        messages.success(self.request, 'El emprendimiento ha sido creado exitosamente.')
+        return super().form_valid(form)
+        
         
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func():
@@ -125,14 +131,18 @@ class EliminarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, DeleteVie
         # Verifica si el usuario actual es el autor del emprendimiento
         emprendimiento = self.get_object()
         return self.request.user == emprendimiento.autor
-    
+    @receiver(pre_delete, sender=Emprendimientos)
+    def eliminar_imagen_emprendimiento(sender, instance, **kwargs):
+        # Eliminar la imagen asociada al emprendimiento
+        if instance.imagen:
+            if os.path.isfile(instance.imagen.path):
+                os.remove(instance.imagen.path)
     def delete(self, request, *args, **kwargs):
         # Obtenemos el emprendimiento que se va a eliminar
         emprendimiento = self.get_object()
 
         # Eliminamos el emprendimiento
         self.perform_destroy(emprendimiento)
-
         # Redireccionamos a la página de listar con el ID del emprendimiento eliminado
         return redirect('empr:listar_emprendimientos', emprendimiento_id=emprendimiento.pk)
     

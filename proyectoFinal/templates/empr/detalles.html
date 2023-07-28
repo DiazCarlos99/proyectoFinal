@@ -8,7 +8,7 @@
 {%endblock%}
 {% block contenido %}
 
-<div class="base">
+<div class="base"> 
 	<div class="contenedor">
 		<div class="mensaje text-center">
 			{%for mensaje in messages%}
@@ -43,7 +43,13 @@
 			<div class="info">
 				<p class="autores">AUTOR: {{emprendimientos.autor}}</p>
 				<p class="categorias">CATEGORIA: {{emprendimientos.categoria}}</p>
+				{% if emprendimientos.get_modificado_naturaltime != emprendimientos.get_creado_naturaltime %}
 				<p class="fecha">FECHA: {{emprendimientos.get_creado_naturaltime}}</p>
+        		<p class="fecha">Editado: {{emprendimientos.get_modificado_naturaltime}}</p>
+				{%else%}
+				<p class="fecha">FECHA: {{emprendimientos.get_creado_naturaltime}}</p>
+    			{% endif %}
+				
 			</div>
 			<!-- Acá van a ir los comentarios -->
 			<div class="comentarios">
@@ -84,7 +90,7 @@
 						<li> 
 							<form action="{% url 'comentarios:crear_comentario' emprendimientos.pk %}" method="post" id="comentario-form">
 								{% csrf_token %}
-								<textarea type="text" class="comentarios-textarea" name="comentario"></textarea>
+								<textarea type="text" class="comentarios-textarea" name="comentario" id="textarea-comentario"></textarea>
 								<button type="submit" class="btn btn-outline-primary text-center">Enviar comentario</button>
 							</form>
 						</li>
@@ -273,7 +279,7 @@ $("#guardarCambiosComentario").on("click", function() {
 
     // Verificar si el comentario está vacío
     if (nuevoContenido === "") {
-        alert("El comentario no puede estar vacío.");
+        Alert("El comentario no puede estar vacío.");
         return;
     }
 

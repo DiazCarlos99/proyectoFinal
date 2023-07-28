@@ -36,4 +36,4 @@ class PrimerContacto(LoginRequiredMixin, CreateView):
             return super().form_valid(form)
         else:
             # Si el formulario no es válido, volver a mostrarlo con los errores
-            return self.form_invalid(form)
+            return self.form_invalid(form) 
