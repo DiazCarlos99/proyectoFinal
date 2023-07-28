@@ -61,9 +61,14 @@
 								<div class="comment-box">
 									<div class="comment-head">
 										<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{com.usuario}}</a></h6>
-										<span>{{com.get_creado_naturaltime }}</span>
+										{% if com.get_modificado_naturaltime != com.get_creado_naturaltime %}
+										<span>Creado:{{com.get_creado_naturaltime }}</span>
+        									<span>Modificado {{ com.get_modificado_naturaltime }}</span>
+										{%else%}
+											<span>Creado:{{com.get_creado_naturaltime }}</span>
+    									{% endif %}
 										<div class="comentarios-enlaces">
-											<a href="#" >Editar</a>
+											<a href="#" class="abrir-modal abrir-modal-editar" data-comentario-id="{{com.pk}}" data-bs-toggle="modal" data-bs-target="#modal2">Editar</a>
 											<a href="#" class="abrir-modal" data-comentario-id="{{ com.pk }}" data-bs-toggle="modal" data-bs-target="#modal1">Eliminar</a>
 										</div>
 									</div>
@@ -118,6 +123,22 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 				<button class="btn btn-danger" id="eliminar-comentario">Eliminar</button>
+			</div>
+		  </div>
+	</div> 
+  </div>
+  <!--modal editar comentario-->
+  <div class="modal fade" id="modal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-body">
+				<form id="editarComentarioForm">
+				<textarea type="text" class="comentarios-textarea" name="comentario"></textarea>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="guardarCambiosComentario">Guardar Cambios</button>
 			</div>
 		  </div>
 	</div> 
@@ -210,10 +231,78 @@
             alert("Error al eliminar el comentario.");
         }
     	});
+		
+		});
+		/////////
+		///////////
+		///////////
 		//fin eliminar comentario
+		$(".abrir-modal-editar").on("click", function(event) {
+			event.preventDefault();
+			// Obtener el ID del comentario desde el atributo data-comentario-id
+			var comentarioId = $(this).data("comentario-id");
+			// Realizar una solicitud AJAX para obtener los detalles del comentario
+			$.ajax({
+				type: "GET",
+				url: "{% url 'comentarios:detalle_comentario' %}",
+				data: {
+					comentario_id: comentarioId
+				},
+				success: function(data) {
+					// Cargar los datos del comentario en el formulario del modal
+					$("#editarComentarioForm textarea[name='comentario']").val(data.texto);
+					// Actualizar el atributo data-comentario-id del botón "Guardar Cambios" dentro del modal
+					$("#guardarCambiosComentario").data("comentario-id", comentarioId);
+					// Abrir el modal
+					$("#modal2").modal("show");
+				},
+				error: function() {
+					alert("Error al obtener los detalles del comentario.");
+				}
+			});
+		});
+		
+		//////////////////////////////////
+		//////////////////////////////////// Evento de clic para el botón "Guardar Cambios" dentro del modal
+$("#guardarCambiosComentario").on("click", function() {
+    // Obtener el ID del comentario desde el atributo data-comentario-id del botón
+    var comentarioId = $(this).data("comentario-id");
+
+    // Obtener el contenido actualizado del comentario desde el formulario del modal
+    var nuevoContenido = $("#editarComentarioForm textarea[name='comentario']").val().trim();
+
+    // Verificar si el comentario está vacío
+    if (nuevoContenido === "") {
+        alert("El comentario no puede estar vacío.");
+        return;
+    }
+
+    // Realizamos una solicitud AJAX para actualizar el comentario
+    $.ajax({
+        type: "POST",
+        url: "{% url 'comentarios:modificar_comentario' %}", // Reemplaza 'ruta_actualizacion_comentario' con la URL correspondiente en tu aplicación
+        data: {
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            comentario_id: comentarioId,
+            nuevo_contenido: nuevoContenido
+        },
+        success: function(data) {
+            // Cerrar el modal después de guardar los cambios
+            $("#modal2").modal("hide");
+
+            // Recargar la página para mostrar el comentario actualizado
+            location.reload();
+        },
+        error: function(xhr) {
+            // Manejar los errores y mostrar el mensaje de error correspondiente
+            var errorMessage = xhr.responseJSON ? xhr.responseJSON.error : "Error al guardar los cambios del comentario.";
+            alert(errorMessage);
+        }
+    });
 });
-
-
+		
+		
+///////
     });
 </script>
 

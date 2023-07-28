@@ -3,11 +3,10 @@ from django.contrib import messages
 from apps.empr.models import Emprendimientos
 from apps.comentarios.models import Comentarios
 from django.views.generic import DeleteView, UpdateView
-from django.urls import reverse_lazy
+
 #CONTROLA SI EL USUARIO ESTA LOGEADO
 from django.contrib.auth.mixins import LoginRequiredMixin
 #controla que el user sea staff
-from django.contrib.auth.mixins    import UserPassesTestMixin
 from django.http import JsonResponse
 from django.views import View
 from django.utils.decorators import method_decorator
@@ -67,9 +66,39 @@ class EliminarComentario(LoginRequiredMixin, View):
         
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+    
+    
+        
+def detalle_comentario(request):
+    comentario_id = request.GET.get('comentario_id', None)
+    try:
+        comentario = Comentarios.objects.get(pk=comentario_id)
+    except Comentarios.DoesNotExist:
+        return JsonResponse({'error': 'Comentario no encontrado'}, status=404)
 
+    return JsonResponse({'texto': comentario.texto})
+   
+   
+    
+@method_decorator(csrf_exempt, name='dispatch')
+class ModificarComentario(View):
+    def post(self, request):
+        try:
+            # Obtenemos el pk del comentario a actualizar y el nuevo contenido
+            comentario_id = request.POST.get('comentario_id', None)
+            nuevo_contenido = request.POST.get('nuevo_contenido', None)
+            # Buscamos el comentario según el id obtenido
+            comentario = Comentarios.objects.get(pk=comentario_id)
 
-
+            # Actualizamos el contenido del comentario
+            comentario.texto = nuevo_contenido
+            comentario.save()
+            messages.success(request, 'Comentario modificado con exito!.')
+            return JsonResponse({'message': 'Comentario actualizado exitosamente'})
+        except Comentarios.DoesNotExist:
+            return JsonResponse({'error': 'Comentario no encontrado'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
 
 
     
