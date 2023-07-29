@@ -52,55 +52,44 @@
 				
 			</div>
 			<!-- Acá van a ir los comentarios -->
-			<div class="comentarios">
-				<div class="comments-container">
-					<h1>Comentarios</h1>
-			
-					<ul id="comments-list" class="comments-list">
-						{%for com in emprendimientos.MisComentarios%}
-						<li>
-							<div class="comment-main-level">
-								<!-- Avatar -->
-								
-								<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-								<!-- Contenedor del Comentario -->
-								<div class="comment-box">
-									<div class="comment-head">
-										<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{com.usuario}}</a></h6>
-										{% if com.get_modificado_naturaltime != com.get_creado_naturaltime %}
-										<span>Creado:{{com.get_creado_naturaltime }}</span>
-        									<span>Modificado {{ com.get_modificado_naturaltime }}</span>
-										{%else%}
-											<span>Creado:{{com.get_creado_naturaltime }}</span>
-    									{% endif %}
-										<div class="comentarios-enlaces">
-											<a href="#" class="abrir-modal abrir-modal-editar" data-comentario-id="{{com.pk}}" data-bs-toggle="modal" data-bs-target="#modal2">Editar</a>
-											<a href="#" class="abrir-modal" data-comentario-id="{{ com.pk }}" data-bs-toggle="modal" data-bs-target="#modal1">Eliminar</a>
-										</div>
-									</div>
-									<div class="comment-content">
-										{{com.texto}}
-									</div>
-								</div>
-							</div>
-							<!-- Respuestas de los comentarios -->
-						</li>
-						{%endfor%}
-						{% if user.is_authenticated %}
-						<li> 
-							<form action="{% url 'comentarios:crear_comentario' emprendimientos.pk %}" method="post" id="comentario-form">
-								{% csrf_token %}
-								<textarea type="text" class="comentarios-textarea" name="comentario" id="textarea-comentario"></textarea>
-								<button type="submit" class="btn btn-outline-primary text-center">Enviar comentario</button>
-							</form>
-						</li>
-						{%endif%}
-					</ul>
 
+			<div class="cont">
+				{%for com in emprendimientos.MisComentarios%}
+				<div class="com">
+					<div class="datos">
+						<div class="nombre">
+							<h5 class="usuario">{{com.usuario}}</h5>
+							{% if com.get_modificado_naturaltime != com.get_creado_naturaltime %}
+							<h5 class="fecha">Modificado {{ com.get_modificado_naturaltime }}</h5>
+							{%else%}
+							<h5 class="fecha">Creado: {{com.get_creado_naturaltime }}</h5>
+							{% endif %}
+						</div>
+						<div class="opciones">
+							<a class="editar abrir-modal abrir-modal-editar" href="#" data-comentario-id="{{com.pk}}" data-bs-toggle="modal" data-bs-target="#modal2">Editar</a>
+							<a class="borrar abrir-modal" href="#" data-comentario-id="{{ com.pk }}" data-bs-toggle="modal" data-bs-target="#modal1">Borrar</a>
+						</div>
+					</div>
+					<div class="comentario">
+						<p>{{com.texto}}</p>
+					</div>
 				</div>
-				
+				{%endfor%}
+
+				{% if user.is_authenticated %}
+				<form class="com" action="{% url 'comentarios:crear_comentario' emprendimientos.pk %}" method="post" id="comentario-form">
+					{% csrf_token %}
+					<div class="enviar-com">
+						<div class="comentar-post">
+							<textarea type="text" placeholder="Escribe un comentario" class="comentarios-textarea" name="comentario" id="textarea-comentario"></textarea>
+						</div>
+						<div class="boton-enviar">
+							<button type="submit" class="btn btn-outline-primary text-center">Enviar</button>
+						</div>
+					</div>
+				</form>
+				{%endif%}
 			</div><!--Fin Comentarios-->
-			
 		</div>
 		
 	</div>
