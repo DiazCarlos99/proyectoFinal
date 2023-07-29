@@ -14,7 +14,7 @@ Fonts
 body{
   padding: 0;
   margin: 0;
-  background: linear-gradient(rgba(111,42,243,0.5), rgba(111,42,243,0.2)) ,url("../img/fondo.jpg");
+  background: linear-gradient(rgba(111,42,243,0.5), rgba(111,42,243,0.2)) ,url("../img/fondo-claro2.jpg");
   background-size:cover;
   font-family: 'Roboto', 'Open Sans', Arial, Helvetica, Sans-serif, Verdana;
 }
