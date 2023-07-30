@@ -3,143 +3,237 @@
 {% block contenido %}
     <h1>Sobre Nosotros</h1>
 
-    <!-- Código para el efecto parallax -->
+    <!-- Enlace a la hoja de estilos de Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
-        /* Estilos para el efecto parallax */
-        .cards-container {
+        /* Estilos adicionales del slider */
+        .ag-slide-block {
             display: flex;
-            perspective: 800px; /* Añade perspectiva para el efecto parallax */
-            justify-content: center; /* Centra horizontalmente las tarjetas */
-            align-items: center; /* Centra verticalmente las tarjetas */
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
         }
 
-        .card {
-            /* Estilos para la tarjeta */
-            width: 150px;
-            height: 200px;
-            margin: 30px; /* Aumenta la separación entre las tarjetas */
-            transition: transform 0.5s, box-shadow 0.3s, background-color 0.3s; /* Agrega transiciones suaves */
-            border-radius: 8px; /* Reduce el radio para suavizar los bordes */
-            cursor: pointer; /* Cambia el cursor a una mano cuando es interactivo */
-            position: relative; /* Posición relativa para poder posicionar las imágenes */
-            overflow: hidden; /* Oculta el contenido que sobresalga del contenedor */
+        .ag-slide-wrapper {
+            width: 30%; /* reducir tamaño de la tarjeta */
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        .card img {
+        .ag-slide_item {
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ajusta la imagen al tamaño de la tarjeta sin deformarla */
-            border-radius: 8px; /* Añade bordes redondeados a las imágenes */
-            position: absolute; /* Posición absoluta para superponer las imágenes */
-            top: 0;
-            left: 0;
-            transition: transform 0.5s, filter 0.5s; /* Agrega una transición suave a la transformación y los filtros */
-            box-shadow: 5px 5px 15px rgba(0, 0, 255, 0.2); /* Aumenta la separación de la sombra celeste */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Agregar transiciones para efecto hover */
+            transition: transform 0.5s, box-shadow 0.3s;
         }
 
-        /* Duplica la capa de foto para crear un efecto de profundidad */
-        .card img.foto-duplicada {
-            transform: translateZ(-10px); /* Ajusta el valor de profundidad */
-            filter: brightness(1) saturate(1.2) contrast(1.2); /* Ajusta saturación y contraste */
-        }
-
-        /* Pseudo-elemento para agregar sombra solo en la parte superior */
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100px; /* Ajusta el tamaño de la sombra */
-            background: linear-gradient(rgba(0, 0, 0, 0.3), transparent); /* Gradiente para la sombra */
-            z-index: 1; /* Coloca el pseudo-elemento por debajo de las imágenes */
-            border-radius: 8px 8px 0 0; /* Añade bordes redondeados solo en la parte superior */
-        }
-
-        /* Pseudo-elemento para agregar sombra solo en la parte inferior */
-        .card::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px; /* Ajusta el tamaño de la sombra */
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.3)); /* Gradiente para la sombra */
-            z-index: 1; /* Coloca el pseudo-elemento por debajo de las imágenes */
-            border-radius: 0 0 8px 8px; /* Añade bordes redondeados solo en la parte inferior */
+        .ag-slide_img {
+            width: 200px; /* Ajustar el ancho de la imagen */
+            height: 200px; /* Aumentar el tamaño de alto */
+            border-radius: 50%;
+            margin-bottom: 10px;
+            /* Agregar transiciones para efecto hover */
+            transition: transform 0.5s, filter 0.5s;
         }
 
         /* Efecto de imágenes flotantes al hacer hover */
-        .card:hover img.fondo {
-            transform: translateX(-2px) translateY(-2px) translateZ(-20px); /* Ajusta los valores para disminuir el efecto del fondo */
+        .ag-slide_item:hover {
+            transform: translateX(3px) translateY(3px) translateZ(10px) rotateX(-5deg) rotateY(-5deg);
+            box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
         }
 
-        .card:hover img.foto {
-            transform: translateX(10px) translateY(10px) translateZ(-50px); /* Ajusta los valores para aumentar el efecto de la foto */
-        }
-
-        .card:hover img.foto-duplicada {
-            transform: translateX(20px) translateY(20px) translateZ(-70px); /* Ajusta los valores para aumentar el efecto de la foto duplicada */
-        }
-
-        /* Efecto de tarjetas al hacer hover */
-        .card:hover {
-            transform: translateX(3px) translateY(3px) translateZ(30px) rotateX(-5deg) rotateY(-5deg); /* Cambia el ángulo de rotación */
-            box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Ajusta el color de la sombra celeste */
-            background-color: transparent; /* Elimina el color de fondo amarillo */
+        .ag-slide_item:hover .ag-slide_img {
+            transform: translateX(5px) translateY(5px) translateZ(-10px);
         }
     </style>
+    
+    <div class="ag-slide-block">
+        <div class="ag-slide-wrapper swiper-container">
+            <ul class="swiper-wrapper ag-slide_list">
+                <!-- Diapositiva 1 - Leandro Gomez -->
+                <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="0">
+                    <img src="https://i.imgur.com/D5YJLNU.png" class="ag-slide_img" alt="Leandro Gomez">
+                    <div class="ag-slide_info clearfix">
+                        <div class="ag-slide-info_descr">
+                            <small class="ag-slide-info_category"></small>
+                            <h6 class="ag-slide-info_title">Leandro Gomez</h6>
+                        </div>
+                        <div class="ag-slide-info_rate">
+                            <b class="ag-slide-info_strong">24 AÑOS</b>
+                            <span class="ag-slide-info_comments">Hola, me llamo Leandro. Vivo en Resistencia y soy estudiante de informática.</span>
+                        </div>
+                    </div>
+                </li>
 
-    <div class="cards-container">
-    <!-- Tarjeta 1 -->
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\proyectoFinal\static\img\fondo 1.png" alt="Hernan Mayol" class="fondo 1">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\proyectoFinal\static\img\fotoHernan.png" alt="Hernan Mayol" class="fotoHernan">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\proyectoFinal\static\img\fotoHernan.png" alt="Hernan Mayol" class="foto-duplicada">
+   <!-- Diapositiva 2 - Martin Ramela -->
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="1">
+          <img src="https://i.imgur.com/GiXu3SD.png" class="ag-slide_img" alt="Martin Ramela">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Martin Ramela</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">28 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola, me llamo Martin. Soy estudiante de programación, me gusta el fútbol con amigos y leer libros o comics.</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Diapositiva 3 - Nicole -->
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="2">
+          <img src="https://i.imgur.com/TamJ6u4.png" class="ag-slide_img" alt="Nicole">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Nicole Teruel</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">27 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola, me llamo Nicole. Vivo en Quitipili y soy estudiante.</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Diapositiva 4 - Matias Sanchez -->
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="3">
+          <img src="https://i.imgur.com/vjYo9sM.png" class="ag-slide_img" alt="Matias Sanchez">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Matias Sanchez</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">34 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola, me llamo Matias. Soy técnico en reparaciones de PC y estudiante de programación en UTN Resistencia.</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="0">
+          <img src="https://i.imgur.com/t4bC6wI.png" class="ag-slide_img" alt="joaquin pablo strusiat">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Joaquin Pablo Strusiat</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">20 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola, mi nombre es Pablo Joaquin Strusiat, tengo 20 años, soy oriundo de Quitilipi Chaco pero vivo en Resistencia hace 3 años, soy estudiante de Ingeniería en la UTN-resistencia y en mi tiempo libre me dedico a estudiar e incursionarme en el mundo de la programación.</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Diapositiva 2 - Martin Ramela -->
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="1">
+          <img src="https://i.imgur.com/hC78VkM.png" class="ag-slide_img" alt="meza roman emanuel">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Meza Roman Emanuel</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">26 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola, mi nombre es Roman, tengo 26 años, soy estudiante de ciencias económicas, y estoy dando los primeros pasos en la programacion gracias al informatorio,
+                me considero una persona con ganas de aprender, y de seguir profundizando mis conocimiento acerca del desarrollo web.</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Diapositiva 3 - Nicole -->
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="2">
+          <img src="https://i.imgur.com/M030K36.png" class="ag-slide_img" alt="hernan mayol">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Hernan Mayol</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">23 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola, me llamo Hernan. Vivo en resistencia soy estudiante de programacion y me interesa aprender mucho mas sobre el desarrollo web</span>
+            </div>
+          </div>
+        </li>
+
+        <!-- Diapositiva 4 - Matias Sanchez -->
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="3">
+          <img src="https://i.imgur.com/Wq3on6P.png" class="ag-slide_img" alt="valentino medina gomez">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Valentino Medina Gomez</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">17 AÑOS</b>
+              <span class="ag-slide-info_comments">Me llamo Valentino Medina Gómez y tengo 17 años. Soy estudiante del nivel secundario en el Colegio Chaco Austral N° 188. Me considero una persona muy trabajadora que siempre se propone llegar a un objetivo ya sea en cualquier ámbito. Cómo conocimiento, tengo un nivel básico de inglés. Y lo que me gusta hacer como hobby es ir al gimnasio</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="2">
+          <img src="https://i.imgur.com/EUL1wft.png" class="ag-slide_img" alt="hernan mayol">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Diaz Carlos</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">33 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola a todos mi nombre es Carlos, un apasionado de la tecnologia y la programación. Me considero una persona comprometida, responsable, y con ganas de seguir aprendiendo, y enfrentar nuevos retos.</span>
+            </div>
+          </div>
+        </li>
+
+        <li class="swiper-slide ag-slide_item" data-swiper-autoplay="1500" data-swiper-slide-index="2">
+          <img src="https://i.imgur.com/thiaNh5.png" class="ag-slide_img" alt="hernan mayol">
+          <div class="ag-slide_info clearfix">
+            <div class="ag-slide-info_descr">
+              <small class="ag-slide-info_category"></small>
+              <h6 class="ag-slide-info_title">Federico Nicolas Oroño</h6>
+            </div>
+            <div class="ag-slide-info_rate">
+              <b class="ag-slide-info_strong">44 AÑOS</b>
+              <span class="ag-slide-info_comments">Hola, soy Federico. Actualmente vivo en General San Martin, me interesa mucho la programación y la informática. </span>
+            </div>
+          </div>
+        </li>
+
+            </ul>
+            <!-- Agregar controles de navegación del slider -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
     </div>
 
-    <!-- Tarjeta 2 -->
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\fondo 2.png" alt="Leandro Gomez" class="fondo">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 2.png" alt="Leandro Gomez" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 2.png" alt="Leandro Gomez" class="foto-duplicada">
-    </div>
-
-    <!-- Tarjeta 3 -->
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 1.png" alt="Martin Ramela" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Martin Ramela" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Martin Ramela" class="foto-duplicada">
-    </div>
-
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 1.png" alt="Nicole Teruel" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Nicole Teruel" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Nicole Teruel" class="foto-duplicada">
-    </div>
-
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 1.png" alt="Matias Sanchez" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Matias Sanchez" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Matias Sanchez" class="foto-duplicada">
-    </div>
-
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 1.png" alt="Carlos Diaz" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Carlos Diaz" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Carlos Diaz" class="foto-duplicada">
-    </div>
-
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 1.png" alt="Pablo Joaquin Strusiat" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Pablo Joaquin Strusiat" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Pablo Joaquin Strusiat" class="foto-duplicada">
-    </div>
-
-    <div class="card">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 1.png" alt="Valentino Medina Gomez" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Valentino Medina Gomez" class="foto">
-      <img src="C:\Users\Hernán\Desktop\ProyectoGrupo6\proyectoFinal\templates\aprende a poner en una carpeta todo gato\foto 4.png" alt="Valentino Medina Gomez" class="foto-duplicada">
-    </div>
-  </div>
+    <!-- Enlace al archivo de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Enlace al archivo de Swiper -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Configurar el slider cuando el documento esté listo
+        $(document).ready(function () {
+            // Inicializar el slider de Swiper
+            var mySwiper = new Swiper('.swiper-container', {
+                // Configuración del slider
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                loop: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                autoplay: {
+                    delay: 1500,
+                },
+            });
+        });
+    </script>
 {% endblock contenido %}
