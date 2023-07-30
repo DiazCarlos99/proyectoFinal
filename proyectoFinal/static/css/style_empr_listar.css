@@ -157,3 +157,17 @@
     margin: 10% 5%;
     padding-bottom: 10rem;
 }
+
+/**/
+
+#app{
+  display: grid;
+  justify-content: center;
+}
+.error{
+  font-size: 15rem;
+  text-align: center;
+}
+.txt-error{
+  font-size: 5rem;
+}
