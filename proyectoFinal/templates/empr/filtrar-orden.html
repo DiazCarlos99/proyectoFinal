@@ -31,6 +31,7 @@
  
 
   <div class="empr">
+    {%if emprendimientos%}
     {%for emprendimimento in emprendimientos%}
     <div class="card" style="border: none;">
         <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
@@ -47,6 +48,9 @@
       </a>
     </div>
     {%endfor%}
+    {%else%}
+    <h1 class="no-disponible">No hay emprendimientos disponibles para esta sección</h1>
+    {%endif%}
   </div>
 
 </div>

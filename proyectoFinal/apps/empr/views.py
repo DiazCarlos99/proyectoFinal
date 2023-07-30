@@ -75,7 +75,12 @@ def DetalleEmprendimientos(LoginRequiredMixin, request, pk):
 class DetalleEmprendimientos(DetailView):
     model = Emprendimientos 
     template_name = 'empr/detalles.html'
-
+    context_object_name = 'emprendimientos'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context
     
 class EditarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Emprendimientos

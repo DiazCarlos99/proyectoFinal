@@ -23,6 +23,7 @@
 	{%endfor%}
 
 	<!--aqui termina el mensaje-->
+{%if empr_cat.items%}
 {% for categoria, emprendimientos in empr_cat.items %}
 	<div class="categorias" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url({{ categoria.imagen.url }});">
 		
@@ -69,6 +70,9 @@
 
 	{%endif%}
 {% endfor %}
+{%else%}
+<h1 clas="no-disponible">No hay emprendimientos disponibles en esta sección</h1>
+{%endif%}
 </div>
 
 {% endblock contenido %}

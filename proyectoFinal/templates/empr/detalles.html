@@ -65,17 +65,23 @@
 							<h5 class="fecha">Creado: {{com.get_creado_naturaltime }}</h5>
 							{% endif %}
 						</div>
+						{% if com.usuario|lower == user.username|lower%}
 						<div class="opciones">
 							<a class="editar abrir-modal abrir-modal-editar" href="#" data-comentario-id="{{com.pk}}" data-bs-toggle="modal" data-bs-target="#modal2">Editar</a>
 							<a class="borrar abrir-modal" href="#" data-comentario-id="{{ com.pk }}" data-bs-toggle="modal" data-bs-target="#modal1">Borrar</a>
 						</div>
+						{%elif user.username|lower == emprendimientos.autor|lower%}
+						<div class="opciones">
+						<a class="borrar abrir-modal" href="#" data-comentario-id="{{ com.pk }}" data-bs-toggle="modal" data-bs-target="#modal1">Borrar</a>
+						</div>
+						{%endif%}
 					</div>
 					<div class="comentario">
 						<p>{{com.texto}}</p>
 					</div>
 				</div>
 				{%endfor%}
-
+			
 				{% if user.is_authenticated %}
 				<form class="com" action="{% url 'comentarios:crear_comentario' emprendimientos.pk %}" method="post" id="comentario-form">
 					{% csrf_token %}
