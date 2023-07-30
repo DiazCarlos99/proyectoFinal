@@ -13,8 +13,8 @@
                 <h2>{{user.username}}</h2>
             </div>
             <div class="esty borde">
-                <h6>{{user.first_name}}</h6>
-                <h6>{{user.last_name}}</h6>                
+                <h6>{{user.first_name|capfirst}}</h6>
+                <h6>{{user.last_name|capfirst}}</h6>                
             </div>
             <div class="esty borde">
                 <h6>{{user.email}}</h6>
@@ -60,7 +60,7 @@
             {%else%}
             <h1 class="no-disponible">Aun no tienens ningún emprendimiento</h1>
             {%endif%}
-      </div
+        </div>
     </div>
 
 </div>

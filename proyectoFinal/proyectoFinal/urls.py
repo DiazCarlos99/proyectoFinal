@@ -32,7 +32,7 @@ urlpatterns = [
 
     path('contacto', views.Contacto, name = 'contacto'),
 
-    #path('emprendimientos', views.Empr, name = 'empr'),
+
 
     #URLS DE AUTH
     path('login/',auth.LoginView.as_view(template_name='usuarios/login.html'),name='login'),
@@ -53,5 +53,4 @@ urlpatterns = [
     
     path('perfil-usuario/', views.Perfil_usuario, name='perfil'),
     
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #sirve para acceder a los archivos media
-# Configuración para servir archivos estáticos en desarrollo
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
