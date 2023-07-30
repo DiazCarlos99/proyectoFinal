@@ -1,4 +1,4 @@
-.dropdown-2{
+.just{
     display: flex;
     justify-content: end;
     margin: 10px;
@@ -9,7 +9,7 @@
     display: flex;
     gap:70px;
     flex-wrap: wrap;
-    justify-content:space-around;
+    justify-content:space-evenly;
     
 }
 
@@ -53,11 +53,7 @@
     color: grey;
     text-align: center;
   }
-footer{
-    display:block;
-    position: absolute;
-    bottom: 0px;
-}
+
 .no-disponible{
     color:white;
     width:100%;

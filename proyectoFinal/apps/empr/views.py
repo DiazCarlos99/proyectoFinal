@@ -202,7 +202,6 @@ class FiltrarPorOrden(ListView):
     model = Emprendimientos
     template_name = 'empr/filtrar-orden.html'
     context_object_name = 'emprendimientos'
-    paginate_by = 2
     def get_queryset(self):
 
         nombre = self.kwargs.get('nombre')
