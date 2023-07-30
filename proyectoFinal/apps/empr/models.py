@@ -68,6 +68,6 @@ class Emprendimientos(models.Model):
     def MisComentarios(self):
         return self.comentarios_set.all()
 
-    
+        
     def __str__(self):
         return self.titulo
