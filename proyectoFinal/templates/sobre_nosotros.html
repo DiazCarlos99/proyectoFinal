@@ -1,59 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{%block css%}
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+{%endblock css%}
 {% block contenido %}
-    <h1>Sobre Nosotros</h1>
+    <h1 class="titulo-sobre-nosotros">Sobre Nosotros</h1>
 
     <!-- Enlace a la hoja de estilos de Swiper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <style>
-        /* Estilos adicionales del slider */
-        .ag-slide-block {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 90vh;
-            margin: 0;
-        }
 
-        .ag-slide-wrapper {
-            width: 30%; /* reducir tamaño de la tarjeta */
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .ag-slide_item {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* Agregar transiciones para efecto hover */
-            transition: transform 0.5s, box-shadow 0.3s;
-        }
-
-        .ag-slide_img {
-            width: 200px; /* Ajustar el ancho de la imagen */
-            height: 200px; /* Aumentar el tamaño de alto */
-            border-radius: 50%;
-            margin-bottom: 10px;
-            /* Agregar transiciones para efecto hover */
-            transition: transform 0.5s, filter 0.5s;
-        }
-
-        /* Efecto de imágenes flotantes al hacer hover */
-        .ag-slide_item:hover {
-            transform: translateX(3px) translateY(3px) translateZ(10px) rotateX(-5deg) rotateY(-5deg);
-            box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
-        }
-
-        .ag-slide_item:hover .ag-slide_img {
-            transform: translateX(5px) translateY(5px) translateZ(-10px);
-        }
-    </style>
     
     <div class="ag-slide-block">
         <div class="ag-slide-wrapper swiper-container">
@@ -187,7 +142,7 @@
             </div>
             <div class="ag-slide-info_rate">
               <b class="ag-slide-info_strong">33 AÑOS</b>
-              <span class="ag-slide-info_comments">Hola a todos mi nombre es Carlos, un apasionado de la tecnologia y la programación. Me considero una persona comprometida, responsable, y con ganas de seguir aprendiendo, y enfrentar nuevos retos.</span>
+              <span class="ag-slide-info_comments">Hola, me llamo Carlos. Vivo en Resistencia y soy estudiante en Informática en la UNNE.</span>
             </div>
           </div>
         </li>
@@ -213,6 +168,9 @@
         </div>
     </div>
 
+{% endblock contenido %}
+
+{%block script%}
     <!-- Enlace al archivo de jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Enlace al archivo de Swiper -->
@@ -231,9 +189,10 @@
                     prevEl: '.swiper-button-prev',
                 },
                 autoplay: {
-                    delay: 1500,
+                    delay: 3500,
                 },
             });
         });
     </script>
-{% endblock contenido %}
+{%endblock script%}
+

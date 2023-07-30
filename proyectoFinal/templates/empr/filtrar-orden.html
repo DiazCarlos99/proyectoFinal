@@ -9,19 +9,27 @@
 <div class="base">
 
   <div class="filtros">
-    <div class="dropdown">
+    <div class="dropdown-2">
       <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Filtrar orden
       </button>
       <ul class="dropdown-menu dropdown-menu-dark">
-        <li><a class="dropdown-item" href="{%url 'empr:emprendimiento_alfabetico' 'asc'%}">Abecedario A - Z</a></li>
-        <li><a class="dropdown-item" href="{%url 'empr:emprendimiento_alfabetico' 'desc'%}">Abecedario Z - A</a></li>
-        <li><a class="dropdown-item" href="{%url 'empr:emprendimiento_antiguedad' 'asc'%}">Más Nuevos</a></li>
-        <li><a class="dropdown-item" href="{%url 'empr:emprendimiento_antiguedad' 'desc'%}">Más Antiguos</a></li>
-      </ul>
+        {% if nombre %}
+                    <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden_cat' nombre=nombre orden='asc' %}">Abecedario A - Z</a></li>
+                    <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden_cat' nombre=nombre orden='desc' %}">Abecedario Z - A</a></li>
+                    <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden_cat' nombre=nombre orden='antiguedad-asc' %}">Más Nuevos</a></li>
+                    <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden_cat' nombre=nombre orden='antiguedad-desc' %}">Más Antiguos</a></li>
+        {% else %}
+            <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden' orden='asc' %}">Abecedario A - Z</a></li>
+            <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden' orden='desc' %}">Abecedario Z - A</a></li>
+            <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden' orden='antiguedad-asc' %}">Más Nuevos</a></li>
+            <li><a class="dropdown-item" href="{% url 'empr:filtrar_orden' orden='antiguedad-desc' %}">Más Antiguos</a></li>
+        {% endif %}
+    </ul>
     </div>
   </div>
-  
+ 
+
   <div class="empr">
     {%for emprendimimento in emprendimientos%}
     <div class="card" style="border: none;">

@@ -43,7 +43,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 {%for categoria in cat_context%}
-                              <li><a class="dropdown-item" href="{%url 'empr:filtrar_emprendimientos' categoria.nombre%}">{{categoria.nombre}}</a></li>
+                              <li><a class="dropdown-item" href="{%url 'empr:filtrar_orden_cat' nombre=categoria.nombre orden='asc'%}">{{categoria.nombre}}</a></li>
                                 {%endfor%}
                             </ul>
                         </li> 

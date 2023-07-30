@@ -160,9 +160,9 @@ class EliminarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, DeleteVie
     
 class  FiltrarEmprendimientos(ListView):
     model = Emprendimientos
-    template_name = 'empr/filtrar.html'
-    success_url = reverse_lazy('empr:filtrar_emprendimientos')
-    context_object_name = 'emprendimientos_filtrados'
+    template_name = 'empr/filtrar-orden.html'
+    #success_url = reverse_lazy('empr:filtrar_emprendimientos')
+    context_object_name = 'emprendimientos'
     
     def get_queryset(self):
         #obtenemos el valor de nombre desde la url
@@ -171,7 +171,12 @@ class  FiltrarEmprendimientos(ListView):
         queryset = Emprendimientos.objects.filter(categoria__nombre=nombre)
         return queryset
     
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Pasamos el nombre de la categoría a la plantilla para mostrarlo en el encabezado o en cualquier otro lugar si es necesario
+        context['nombre_categoria'] = self.kwargs.get('nombre')
+        return context
+'''
 class FiltrarPorAntiguedad(ListView):
     model = Emprendimientos
     template_name = 'empr/filtrar-orden.html'
@@ -184,17 +189,38 @@ class FiltrarPorAntiguedad(ListView):
             return Emprendimientos.objects.annotate(creado_date=Func(F('creado'), function='date')).order_by('-creado_date')
         elif orden == 'desc':
             return Emprendimientos.objects.annotate(creado_date=Func(F('creado'), function='date')).order_by('creado_date')
-        
-class FiltrarPorOrdenAlfabetico(ListView):
+'''  
+   
+class FiltrarPorOrden(ListView):
     model = Emprendimientos
     template_name = 'empr/filtrar-orden.html'
     context_object_name = 'emprendimientos'
     
     def get_queryset(self):
+
+        nombre = self.kwargs.get('nombre')
+        
+         # Verificar si el parámetro 'nombre' no está vacío
+        if nombre:
+            # Filtrar según la categoría especificada por 'nombre'
+            queryset = Emprendimientos.objects.filter(categoria__nombre=nombre)
+        else:
+            # No se especificó un filtro de categoría, mostrar todos los emprendimientos
+            queryset = Emprendimientos.objects.all()
+        
         orden = self.kwargs.get('orden')
-        
         if orden == 'asc':
-            return Emprendimientos.objects.order_by('titulo')
+            queryset = queryset.order_by('titulo')
         elif orden == 'desc':
-            return Emprendimientos.objects.order_by('-titulo')
+            queryset = queryset.order_by('-titulo')
+        elif orden == 'antiguedad-asc':
+            queryset = queryset.annotate(creado_date=Func(F('creado'), function='date')).order_by('-creado_date')
+        elif orden == 'antiguedad-desc':
+            queryset = queryset.annotate(creado_date=Func(F('creado'), function='date')).order_by('creado_date')
         
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['nombre'] = self.kwargs.get('nombre')
+        return context
