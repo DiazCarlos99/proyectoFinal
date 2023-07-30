@@ -51,7 +51,7 @@ class Emprendimientos(models.Model):
         diff = now - self.modificado
         print(diff)
         
-        if diff < timedelta(minutes=1):
+        if diff < timedelta(minutes=1): 
             return 'hace unos segundos'
         elif diff < timedelta(hours=1):
             minutes = diff.seconds // 60
@@ -67,6 +67,7 @@ class Emprendimientos(models.Model):
     
     def MisComentarios(self):
         return self.comentarios_set.all()
+
     
     def __str__(self):
         return self.titulo
