@@ -23,22 +23,23 @@
   </div>
   
   <div class="empr">
-					{%for emprendimimento in emprendimientos%}
-					<div class="card" style="border: none;">
-						<a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
+    {%for emprendimimento in emprendimientos%}
+    <div class="card" style="border: none;">
+        <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
 
-						<div class="img-content" style="background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)) ,url({{emprendimimento.imagen.url}}); background-size: cover;">
-							<img src="{{emprendimimento.imagen.url}}" alt="foto">
-						</div>
+        <div class="img-content" style="background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)) ,url({{emprendimimento.imagen.url}}); background-size: cover;">
+          <img src="{{emprendimimento.imagen.url}}" alt="foto">
+        </div>
 
-						<div class="card-content">
-							<h2 class="titulo">{{emprendimimento.titulo}}</h2>
-							<p class="name">{{emprendimimento.resumen}}</p>
-						</div>
-            
-					</a>
-					</div>
-					{%endfor%}
-
+        <div class="card-content">
+          <h2 class="titulo">{{emprendimimento.titulo}}</h2>
+          <p class="name">{{emprendimimento.resumen}}</p>
+        </div>
+        
+      </a>
+    </div>
+    {%endfor%}
   </div>
+
+</div>
 {% endblock contenido %}

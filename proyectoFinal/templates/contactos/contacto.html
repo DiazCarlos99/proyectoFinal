@@ -9,25 +9,25 @@
 <div id="custom-alert" class="custom-alert">
     <span class="close-btn" onclick="closeAlert()">&times;</span>
     <p id="alert-message"></p>
-  </div>
-  {%for mensaje in messages%}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Bien hecho!</strong> {{ mensaje }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {%endfor%}
-    <div class="base dist">
+</div>
+{%for mensaje in messages%}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Bien hecho!</strong> {{ mensaje }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{%endfor%}
+<div class="base">
 
-        <div class="formulario-mapa">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9307.418581222439!2d-58.976026710513054!3d-27.47096775387211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1690548550570!5m2!1ses-419!2sar" width="400" height="566" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+    <div class="formulario-mapa">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9307.418581222439!2d-58.976026710513054!3d-27.47096775387211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1690548550570!5m2!1ses-419!2sar" width="400" height="566" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 
-            <form method="POST" class="contenedor" id="formulario">{%csrf_token%}
-                <h3 class="mb-4">CONTACTATE CON NOSOTROS</h3>
-                {{form.as_div}}
-                <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
-            </form>
+    <form method="POST" class="contenedor" id="formulario">{%csrf_token%}
+        <h3 class="mb-4">CONTACTATE CON NOSOTROS</h3>
+        {{form.as_div}}
+        <p><input type="submit" class="btn btn-primary btn-block" value="Confirmar"></p>
+    </form>
 
-    </div> 
+</div> 
 
 {% endblock contenido %}   

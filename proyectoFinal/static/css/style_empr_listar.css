@@ -5,7 +5,7 @@
 }
 .categorias{
   height: auto;
-  margin: 50px;
+  margin: 0px 50px 50px 50px;
   padding: 20px;
   border: solid;
   border-color: #FFF;
@@ -25,6 +25,12 @@
 
 .filtro{
   filter: brightness(50%);
+}
+
+.btn-todo{
+    display: flex;
+    justify-content: end;
+    margin: 10px;
 }
 
 /*>>>>>>> ce03856f6a7ebda84eb960fc8b6ea70a0e37cdbe*/

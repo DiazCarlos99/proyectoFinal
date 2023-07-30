@@ -11,7 +11,10 @@
 
 <div class="contenedor">
 	<!-- Aquí puedes mostrar los detalles del emprendimiento si es necesario -->
-	<a href="{%url 'empr:emprendimiento_alfabetico' 'asc'%}"><button type="button" class="btn btn-danger">Todos los Emprendimientos</button></a>
+	<div class="btn-todo">
+		<a href="{%url 'empr:emprendimiento_alfabetico' 'asc'%}"><button type="button" class="btn btn-danger">Todos los Emprendimientos</button></a>
+	</div>
+	
 	{%for mensaje in messages%}
 	<div class="alert alert-success alert-dismissible fade show" role="alert">
 		<strong>Bien hecho!</strong> {{ mensaje }}

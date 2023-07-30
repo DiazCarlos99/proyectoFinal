@@ -8,6 +8,7 @@
 }
 
 .contenedor{
+    max-height: 100%;
     width: 420px;
     background: transparent;
     backdrop-filter: blur(20px);
