@@ -163,10 +163,11 @@ class EliminarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, DeleteVie
         return render(self.request, 'error/403.html', {'mensaje': 'No tienes permiso para acceder a esta página.'}, status=403)
 
     
+'''
 class  FiltrarEmprendimientos(ListView):
     model = Emprendimientos
     template_name = 'empr/filtrar-orden.html'
-    #success_url = reverse_lazy('empr:filtrar_emprendimientos')
+    
     context_object_name = 'emprendimientos'
     
     def get_queryset(self):
@@ -174,6 +175,7 @@ class  FiltrarEmprendimientos(ListView):
         nombre = self.kwargs.get('nombre')
         #filtramos segun id
         queryset = Emprendimientos.objects.filter(categoria__nombre=nombre)
+        
         return queryset
     
     def get_context_data(self, **kwargs):
@@ -181,7 +183,7 @@ class  FiltrarEmprendimientos(ListView):
         # Pasamos el nombre de la categoría a la plantilla para mostrarlo en el encabezado o en cualquier otro lugar si es necesario
         context['nombre_categoria'] = self.kwargs.get('nombre')
         return context
-'''
+
 class FiltrarPorAntiguedad(ListView):
     model = Emprendimientos
     template_name = 'empr/filtrar-orden.html'
@@ -200,7 +202,7 @@ class FiltrarPorOrden(ListView):
     model = Emprendimientos
     template_name = 'empr/filtrar-orden.html'
     context_object_name = 'emprendimientos'
-    
+    paginate_by = 2
     def get_queryset(self):
 
         nombre = self.kwargs.get('nombre')

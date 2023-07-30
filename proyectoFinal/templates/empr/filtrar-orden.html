@@ -52,6 +52,17 @@
     <h1 class="no-disponible">No hay emprendimientos disponibles para esta sección</h1>
     {%endif%}
   </div>
-
+  {% if page_obj.has_previous %}
+  <a class="btn btn-outline-primary rounded-pill"
+     href="?page={{ page_obj.previous_page_number }}{% if query %}&search={{ query }}{% endif %}">Antes</a>
+{% else %}
+  <a class="btn btn-outline-secondary rounded-pill disabled">Antes</a>
+{% endif %}
+{% if page_obj.has_next %}
+  <a class="btn btn-outline-primary rounded-pill"
+     href="?page={{ page_obj.next_page_number }}{% if query %}&search={{ query }}{% endif %}">Siguiente</a>
+{% else %}
+  <a class="btn btn-outline-secondary rounded-pill disabled">Siguiente</a>
+{% endif %}
 </div>
 {% endblock contenido %}

@@ -34,9 +34,10 @@ def usuarios_processor(request):
 def emprendimientos_categorias(request):
     categorias = Categoria.objects.filter(emprendimientos__isnull=False).distinct()
     emprendimientos_por_categoria = {}
+    paginate_by = 6
     
     for cat in categorias:
         emprendimientos = Emprendimientos.objects.filter(categoria=cat)
         emprendimientos_por_categoria[cat] = emprendimientos
         
-    return {'empr_cat': emprendimientos_por_categoria}
+    return {'empr_cat': emprendimientos_por_categoria} 
