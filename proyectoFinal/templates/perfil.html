@@ -32,34 +32,36 @@
         </div>
 
     </div>
-    <h1 class="mis-emprendimientos">Mis Emprendimientos</h1>
-    <div class="empr">
-        
-        {%if empr_context%}
-        
-            {%for emprendimimento in empr_context%}
-        {%if emprendimimento.autor|lower ==  user.username|lower%}
-        <div class="card" style="border: none;">
-            <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
-    
-            <div class="img-content" style="background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)) ,url({{emprendimimento.imagen.url}}); background-size: cover;">
-              <img src="{{emprendimimento.imagen.url}}" alt="foto">
-            </div>
-    
-            <div class="card-content">
-              <h2 class="titulo">{{emprendimimento.titulo}}</h2>
-              <p class="name">{{emprendimimento.resumen}}</p>
-            </div>
+    <div class="empr-cont">
+        <h2 class="mis-empr">Mis Emprendimientos</h2>
+        <div class="empr">
             
-          </a>
-        </div>
-        {%endif%}
-        {%endfor%}
-       
-        {%else%}
-        <h1 class="no-disponible">Aun no tienens ningún emprendimiento</h1>
-        {%endif%}
-      </div>
+            {%if empr_context%}
+            
+                {%for emprendimimento in empr_context%}
+            {%if emprendimimento.autor|lower ==  user.username|lower%}
+            <div class="card" style="border: none;">
+                <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
+        
+                <div class="img-content" style="background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)) ,url({{emprendimimento.imagen.url}}); background-size: cover;">
+                <img src="{{emprendimimento.imagen.url}}" alt="foto">
+                </div>
+        
+                <div class="card-content">
+                <h2 class="titulo">{{emprendimimento.titulo}}</h2>
+                <p class="name">{{emprendimimento.resumen}}</p>
+                </div>
+                
+            </a>
+            </div>
+            {%endif%}
+            {%endfor%}
+        
+            {%else%}
+            <h1 class="no-disponible">Aun no tienens ningún emprendimiento</h1>
+            {%endif%}
+      </div
+    </div>
 
 </div>
 
