@@ -51,5 +51,7 @@ urlpatterns = [
     
     path('comentarios/', include('apps.comentarios.urls')),
     
+    path('perfil-usuario/', views.Perfil_usuario, name='perfil'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #sirve para acceder a los archivos media
 # Configuración para servir archivos estáticos en desarrollo

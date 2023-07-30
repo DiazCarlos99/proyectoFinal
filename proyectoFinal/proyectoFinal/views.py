@@ -17,3 +17,6 @@ def Empr(request):
 
 	return render(request,'empr.html')
 
+def Perfil_usuario(request):
+    
+    return render(request, 'perfil.html')
