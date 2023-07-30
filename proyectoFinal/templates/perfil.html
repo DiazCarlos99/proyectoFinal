@@ -27,15 +27,18 @@
                 {% endif %}
 
             </div>
-
+ 
 
         </div>
 
     </div>
-
+    <h1 class="mis-emprendimientos">Mis Emprendimientos</h1>
     <div class="empr">
-        {%if emprendimientos%}
-        {%for emprendimimento in emprendimientos%}
+        
+        {%if empr_context%}
+        
+            {%for emprendimimento in empr_context%}
+        {%if emprendimimento.autor|lower ==  user.username|lower%}
         <div class="card" style="border: none;">
             <a href="{% url 'empr:detalle_emprendimiento' emprendimimento.pk %}">
     
@@ -50,9 +53,11 @@
             
           </a>
         </div>
+        {%endif%}
         {%endfor%}
+       
         {%else%}
-        <h1 class="no-disponible">No hay emprendimientos disponibles para esta sección</h1>
+        <h1 class="no-disponible">Aun no tienens ningún emprendimiento</h1>
         {%endif%}
       </div>
 
