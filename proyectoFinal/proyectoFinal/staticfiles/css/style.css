@@ -1,0 +1,303 @@
+/*
+=============== 
+Fonts
+===============
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body{
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(rgba(111,42,243,0.5), rgba(111,42,243,0.2)) ,url("../img/fondo-claro2.jpg");
+  background-size:cover;
+  font-family: 'Roboto', 'Open Sans', Arial, Helvetica, Sans-serif, Verdana;
+}
+a{
+  text-decoration: none;
+}
+.titulo, .autor{
+  color: black;
+}
+.categoria{
+  color:red;
+}
+/*
+/*
+nav
+*/
+nav{
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.estlogo{
+  width: 200px;
+  border-radius: 10px;
+}
+/*
+Container // carrusel de imagenes
+*/
+.container{
+  margin-top: 3rem;
+  
+}
+
+.tamaño{
+  height: 200px;
+}
+
+  .container .carousel {
+    max-width: 100%;
+    margin: 0 auto; 
+  }
+  
+  .container .carousel img {
+    max-width: 100%;
+    height: auto;
+  }
+/*
+Article // numeros
+*/
+
+.contador {
+  background: #e7e8e9;
+  padding: 1rem 1rem;
+  border-radius: 0.25rem;
+  border-bottom: 4px solid transparent;
+  margin: 25px;
+}
+
+article span {
+  font-size: 2.5rem;
+  
+  line-height: 1.25;
+}
+
+article p {
+  margin: 0;
+  text-transform: capitalize;
+  font-size: 1.3rem;
+}
+
+article:nth-of-type(1) {
+  border-bottom-color: #f59e0b;
+  max-width: 70%;
+  overflow: hidden;
+}
+article:nth-of-type(2) {
+  border-bottom-color: #14b8a6;
+  max-width: 70%;
+  overflow: hidden;
+}
+article:nth-of-type(3) {
+  border-bottom-color: #5140ec;
+  max-width: 70%;
+  overflow: hidden;
+}
+/*emprendimientos*/
+.titulo-empr{
+  color: #e7e8e9;
+  padding: 1rem;
+  margin: 4rem;
+  width: auto;
+  border-bottom: solid #f59e0b;
+}
+/*footer*/
+
+footer{
+  background: black;
+  display: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+}
+
+footer p{
+  color: white;
+  padding: 3px;
+  margin-top: 10px;
+}
+
+
+
+a {
+  color: #03658c;
+  text-decoration: none;
+}
+
+ul {
+ list-style-type: none;
+}
+
+
+/* Estilos generales */
+.comments-container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.comment-box{
+  display: block;
+  
+}
+.comment-avatar{
+ margin-right: 5px;
+}
+.comment-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+  
+}
+
+.comment-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-name {
+  font-weight: bold;
+}
+
+.comment-content {
+  font-size: 15px;
+  color: #595959;
+  margin-top: 10px;
+}
+.comment-main-level{
+  display: flex;
+  margin-bottom: 0.85rem;
+  padding: 10px;
+  border-style: solid;
+  border-color: hsl(204, 8%, 88%);
+  border-radius: 10px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.comentarios-enlaces{
+  font-size: 0.8rem;
+  padding: 5px;
+}
+.comentarios-enlaces a:nth-of-type(1){
+  color:blue;
+  margin-right: 3px;
+}
+.comentarios-enlaces a:nth-of-type(2){
+  color:red;
+}
+.comentar:hover{
+  background-color: green;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Estilos para pantallas pequeñas (Responsive) */
+@media only screen and (max-width: 480px) {
+  .comments-container {
+    padding: 10px;
+  }
+
+  .comment-avatar img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comment-head {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .comment-head i {
+    font-size: 12px;
+  }
+
+  .comment-content {
+    font-size: 14px;
+  }
+}
+
+.formulario-contenedor{
+  display: flex;
+  width: 140vh;
+}
+
+.formulario-contacto{
+  margin-right: 2rem;
+}
+
+.formulario-mapa{
+  margin-left: 2rem;
+  border-radius: 10px;
+  border: solid;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.formulario-mapa iframe{
+  border-radius: 8px;
+  margin: 2px;
+  margin-bottom: 0;
+}
+/*Sobre Nosotros*/
+
+/* Estilos adicionales del slider */
+.ag-slide-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  margin: 0;
+}
+
+.ag-slide-wrapper {
+  width: 30%; /* reducir tamaño de la tarjeta */
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.ag-slide_item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Agregar transiciones para efecto hover */
+  transition: transform 0.5s, box-shadow 0.3s;
+}
+
+.ag-slide_img {
+  width: 200px; /* Ajustar el ancho de la imagen */
+  height: 200px; /* Aumentar el tamaño de alto */
+  border-radius: 50%;
+  margin-bottom: 10px;
+  /* Agregar transiciones para efecto hover */
+  transition: transform 0.5s, filter 0.5s;
+}
+
+/* Efecto de imágenes flotantes al hacer hover */
+.ag-slide_item:hover {
+  transform: translateX(3px) translateY(3px) translateZ(10px) rotateX(-5deg) rotateY(-5deg);
+  box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+}
+
+.ag-slide_item:hover .ag-slide_img {
+  transform: translateX(5px) translateY(5px) translateZ(-10px);
+}
+.titulo-sobre-nosotros{
+  margin-top:2rem;
+  color: #e7e8e9;
+  text-align: center;
+}
