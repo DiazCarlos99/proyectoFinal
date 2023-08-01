@@ -1,4 +1,4 @@
-from typing import Any 
+from typing import Any
 from django.db.models.query import QuerySet
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
@@ -21,23 +21,23 @@ from django.db.models import Func, F
 
 class CrearEmpredimiento(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Emprendimientos
-    form_class = Form_Alta 
+    form_class = Form_Alta
     template_name = 'empr/crear.html'
 
     def get_success_url(self):
         return reverse('empr:detalle_emprendimiento', kwargs={'pk': self.object.pk})
-    
+
     def test_func(self):
         return self.request.user.is_staff
-    
+
     def form_valid(self, form):
         emprendimiento = form.save(commit=False)
         emprendimiento.autor = self.request.user
         emprendimiento.save()
         messages.success(self.request, 'El emprendimiento ha sido creado exitosamente.')
         return super().form_valid(form)
-        
-        
+
+
     def dispatch(self, request, *args, **kwargs):
         if not self.test_func():
             return self.handle_no_permission()
@@ -46,15 +46,15 @@ class CrearEmpredimiento(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def handle_no_permission(self):
         return render(self.request, 'error/403.html', {'mensaje': 'No tienes permiso para acceder a esta página.'}, status=403)
 
-    
-    
 
-    
+
+
+
 class   ListarEmprendimientos(ListView):
     model = Emprendimientos
-    template_name = 'empr/listar.html' 
+    template_name = 'empr/listar.html'
     context_object_name = 'emprendimientos_por_categoria'
-    
+
     def get(self, request, *args, **kwargs):
         emprendimiento_id = request.GET.get('emprendimiento_id')
         if emprendimiento_id:
@@ -62,15 +62,15 @@ class   ListarEmprendimientos(ListView):
         return super().get(request, *args, **kwargs)
 
 class DetalleEmprendimientos(DetailView):
-    model = Emprendimientos 
+    model = Emprendimientos
     template_name = 'empr/detalles.html'
     context_object_name = 'emprendimientos'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         return context
-    
+
 class EditarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Emprendimientos
     form_class = Form_Modificacion
@@ -78,20 +78,20 @@ class EditarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
 
     def test_func(self):
         return self.request.user.is_staff
-    
+
     def test_func_autor(self):
         emprendimiento = self.get_object()
         return self.request.user == emprendimiento.autor
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['emprendimiento_id'] = self.object.pk
         return context
-    
+
     def get_success_url(self):
         emprendimiento_id = self.object.pk
         return reverse_lazy('empr:detalle_emprendimiento', kwargs={'pk': emprendimiento_id})
-    
+
     def form_valid(self, form):
         messages.success(self.request, 'El emprendimiento ha sido actualizado exitosamente.')
         return super().form_valid(form)
@@ -104,7 +104,7 @@ class EditarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         return render(self.request, 'error/403.html', {'mensaje': 'No tienes permiso para acceder a esta página.'}, status=403)
 
 
-     
+
 class EliminarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Emprendimientos
     template_name = 'empr/eliminar.html'
@@ -112,7 +112,7 @@ class EliminarEmprendimientos(LoginRequiredMixin, UserPassesTestMixin, DeleteVie
 
     def test_func(self):
         return self.request.user.is_staff
-    
+
     def test_func_autor(self):
         emprendimiento = self.get_object()
         return self.request.user == emprendimiento.autor
@@ -142,22 +142,22 @@ class FiltrarPorOrden(ListView):
     def get_queryset(self):
 
         nombre = self.kwargs.get('nombre')
-        
+
         if nombre:
             queryset = Emprendimientos.objects.filter(categoria__nombre=nombre)
         else:
             queryset = Emprendimientos.objects.all()
-        
+
         orden = self.kwargs.get('orden')
         if orden == 'asc':
             queryset = queryset.order_by('titulo')
         elif orden == 'desc':
             queryset = queryset.order_by('-titulo')
         elif orden == 'antiguedad-asc':
-            queryset = queryset.annotate(creado_date=Func(F('creado'), function='date')).order_by('-creado_date')
+            queryset = queryset.order_by('creado')
         elif orden == 'antiguedad-desc':
-            queryset = queryset.annotate(creado_date=Func(F('creado'), function='date')).order_by('creado_date')
-        
+            queryset = queryset.order_by('-creado')
+
         return queryset
 
     def get_context_data(self, **kwargs):
