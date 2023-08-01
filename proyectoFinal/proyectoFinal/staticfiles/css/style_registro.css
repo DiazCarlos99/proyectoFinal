@@ -9,7 +9,9 @@
     align-items: center;
     background:linear-gradient(rgba(111,42,243,0.3), rgba(0,0,0,0.9)), url("../img/login/fondo1.jpg");
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
+    gap:20px;
+    flex-wrap: wrap;
 }
 
 .contenedor{
@@ -37,7 +39,7 @@
 }
 
 .contenedor div .helptext{
-    display: none;    
+    display: none;
 }
 
 .contenedor input{
@@ -50,13 +52,13 @@
 }
 
 .contenedor p{
-    margin-top: 30px;    
+    margin-top: 30px;
 }
 
 .contenedor p input{
     background-color: white;
     color: black;
-    font-weight: 600;    
+    font-weight: 600;
 }
 
 .contenedor div textarea{
@@ -68,7 +70,7 @@
     border: 3px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     color: white;
-    
+
 }
 /*alertas*/
 
@@ -84,7 +86,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     display: none;
   }
-  
+
   .close-btn {
     position: absolute;
     top: 0px;
