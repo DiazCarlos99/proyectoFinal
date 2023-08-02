@@ -10,6 +10,7 @@
 .contenedor{
     max-height: 100%;
     width: 420px;
+    max-width: 90%;
     background: transparent;
     backdrop-filter: blur(20px);
     color: white;
