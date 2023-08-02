@@ -8,7 +8,7 @@
 {%endblock%}
 {% block contenido %}
 
-<div class="base"> 
+<div class="base">
 	<div class="contenedor">
 		<div class="mensaje text-center">
 			{%for mensaje in messages%}
@@ -24,7 +24,7 @@
 			<div class="cont">
 				<div class="cont-img">
 					<img class="img-empr" src="{{emprendimientos.imagen.url}}" alt="foto de emprendimiento">
-				</div>			
+				</div>
 				<p class="contenido">{{emprendimientos.contenido}}</p>
 				<div class="botones">
 					{%if emprendimientos.autor == user%}
@@ -33,11 +33,11 @@
 							<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
 								Eliminar
 							  </button>
-						
+
 						{%endif%}
 						<!-- <a href="{%url 'empr:eliminar_emprendimiento' emprendimientos.pk%}" class="btn btn-info text-center">eliminar</a> -->
 						<!-- Modal -->
-						
+
 				</div>
 			</div>
 			<div class="info">
@@ -49,7 +49,7 @@
 				{%else%}
 				<p class="fecha">FECHA: {{emprendimientos.get_creado_naturaltime}}</p>
     			{% endif %}
-				
+
 			</div>
 			<!-- Acá van a ir los comentarios -->
 
@@ -81,7 +81,7 @@
 					</div>
 				</div>
 				{%endfor%}
-			
+
 				{% if user.is_authenticated %}
 				<form class="com" action="{% url 'comentarios:crear_comentario' emprendimientos.pk %}" method="post" id="comentario-form">
 					{% csrf_token %}
@@ -94,10 +94,16 @@
 						</div>
 					</div>
 				</form>
+				{%else%}
+				<div class="boton-comentario">
+						<h3>¿Quieres realizar un comentario?</h3>
+						<a href="{%url 'login'%}"><button class="btn btn-outline-primary text-center">Loguearme</button>
+						<a href="{%url 'usuarios:registrar'%}"><button class="btn btn-outline-success text-center">Registrarme</button>
+					</div>
 				{%endif%}
 			</div><!--Fin Comentarios-->
 		</div>
-		
+
 	</div>
 </div>
   <!--modal eliminar emprendimiento-->
@@ -112,7 +118,7 @@
 				<button class="btn btn-danger" id="eliminar-btn">Eliminar</button>
 			</div>
 		</div>
-	</div> 
+	</div>
 </div>
   <!--modal eliminar comentario-->
   <div class="modal fade" id="modal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -126,7 +132,7 @@
 				<button class="btn btn-danger" id="eliminar-comentario">Eliminar</button>
 			</div>
 		  </div>
-	</div> 
+	</div>
   </div>
   <!--modal editar comentario-->
   <div class="modal fade" id="modal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -142,12 +148,12 @@
                 <button type="button" class="btn btn-primary" id="guardarCambiosComentario">Guardar Cambios</button>
 			</div>
 		  </div>
-	</div> 
+	</div>
   </div>
 {% endblock contenido %}
 {%block script%}
 <script>
-	
+
     $(document).ready(function() {
 		//elminar articulo
         $("#eliminar-btn").on("click", function() {
@@ -209,7 +215,7 @@
     	// Actualizar el atributo data-comentario-id del botón "Eliminar" dentro del modal
     	$("#eliminar-comentario").data("comentario-id", comentarioIdToDelete);
 		});
-	
+
 		// Evento de clic para el botón "Eliminar" dentro del modal
 		$("#eliminar-comentario").on("click", function() {
     	// Obtener el ID del comentario desde el atributo data-comentario-id del botón
@@ -232,7 +238,7 @@
             alert("Error al eliminar el comentario.");
         }
     	});
-		
+
 		});
 		/////////
 		///////////
@@ -262,7 +268,7 @@
 				}
 			});
 		});
-		
+
 		//////////////////////////////////
 		//////////////////////////////////// Evento de clic para el botón "Guardar Cambios" dentro del modal
 $("#guardarCambiosComentario").on("click", function() {
@@ -301,8 +307,8 @@ $("#guardarCambiosComentario").on("click", function() {
         }
     });
 });
-		
-		
+
+
 ///////
     });
 </script>

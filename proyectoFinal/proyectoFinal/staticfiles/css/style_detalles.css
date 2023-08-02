@@ -4,17 +4,17 @@
     background:linear-gradient(rgba(111,42,243,0.3), rgba(0,0,0,0.9)), url("../img/login/fondo1.jpg");
     background-size: cover;
     height: 100%;
-    padding: 40px;
 }
 
 .contenedor{
-    max-width: 80%;
-    min-width: 400px;
+    margin: 5%;
+    width: 800px;
+    max-width: 95%;
     height: 100%;
     background: transparent;
     backdrop-filter: blur(20px);
     color: white;
-    padding: 20px;
+    padding: 10px;
     border: solid;
     border-radius: 8px;
     border-color: rgba(255, 255, 255, 0.2);
@@ -30,15 +30,22 @@
 
 .titulos{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    
+
 }
 
 .cont{
     padding: 20px;
     border: solid;
     border-radius: 8px;
-    border-color: rgba(255, 255, 255, 0.2);    
-    
+    border-color: rgba(255, 255, 255, 0.2);
+
+}
+
+.cont-com{
+    padding: 10px;
+    border: solid;
+    border-radius: 8px;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .cont-img{
@@ -48,7 +55,7 @@
 .img-empr{
     margin: auto;
     max-width: 100%;
-    max-height: 100%; 
+    max-height: 100%;
 }
 
 .contenido{
@@ -62,7 +69,7 @@
     border: solid;
     border-radius: 8px;
     border-color: rgba(255, 255, 255, 0.2);
-    margin: 20px 0px; 
+    margin: 20px 0px;
     padding: 20px;
 }
 
@@ -93,8 +100,10 @@
     border: solid;
     border-color: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    margin: 0px 40px 10px 40px;
+    margin: 0px 0px 10px 0px;
 }
+
+
 
 .datos{
     display:flex;
@@ -154,7 +163,7 @@
 
 .comentario p{
     margin: 0;
-    text-align: justify;
+    text-align:start;
 }
 
 .enviar-com{
@@ -171,7 +180,7 @@
     display: flex;
     align-content: center;
     justify-content: center;
-    
+
 }
 
 .comentar-post textarea {
@@ -186,3 +195,6 @@
     padding: 5px;
 }
 
+.boton-comentario, a, button:nth-of-type(1){
+    margin-left: 0.4rem;
+}
