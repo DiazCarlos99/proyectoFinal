@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block css %}
 {% load static %}
@@ -25,12 +25,18 @@
     </form>
 
     <div class="contenedor">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9307.418581222439!2d-58.976026710513054!3d-27.47096775387211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1690548550570!5m2!1ses-419!2sar" 
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9307.418581222439!2d-58.976026710513054!3d-27.47096775387211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sar!4v1690548550570!5m2!1ses-419!2sar"
         width="400" height="534" style="border:0; max-width: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
 
 
-</div> 
+</div>
 
-{% endblock contenido %}   
+{% endblock contenido %}
+{% block contacto %}
+<div class="contactanos">
+<p>Envianos un whatsapp:<br> 3624044839</p>
+<p>Nos ubicamos en:<br> Av. Castelli y Av.Chaco - Diagonal Parque Tiro Federal</p>
+</div>
+{% endblock contacto %}

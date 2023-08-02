@@ -97,3 +97,12 @@
 
   }
 
+.contactanos{
+ display:flex;
+ justify-content:space-around;
+ background-color:rgb(33, 12, 74, 0.5)
+}
+.contactanos p{
+    color:white;
+    margin: 0.5rem;
+}
