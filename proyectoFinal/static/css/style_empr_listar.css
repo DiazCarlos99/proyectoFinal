@@ -6,7 +6,7 @@
 .categorias{
   height: auto;
   margin: 0 5% 5% 5%;
-  padding: 20px;
+  padding: 5%;
   border: solid;
   border-color: #FFF;
   border-radius: 20px;
@@ -40,10 +40,10 @@
 .slide-container{
     max-width: 1120px;
     width: 100%;
-    padding: 40px 0;
+    padding: 10px 0;
   }
   .slide-content{
-    margin: 0 40px;
+    margin: 0 20px;
     overflow: hidden;
     border-radius: 25px;
   }
