@@ -4,9 +4,10 @@
 }
 
 .base{
+    padding: 5% 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: start;
     background:linear-gradient(rgba(111,42,243,0.3), rgba(0,0,0,0.9)), url("../img/login/fondo1.jpg");
     background-size: cover;
     height: auto;
@@ -14,11 +15,11 @@
 
 .contenedor{
     width: 600px;
+    max-width: 90%;
     background: transparent;
     backdrop-filter: blur(20px);
     color: white;
     padding: 20px;
-    margin: 40px;
     border: solid;
     border-radius: 8px;
     border-color: rgba(255, 255, 255, 0.2);
