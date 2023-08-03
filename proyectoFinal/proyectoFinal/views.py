@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 
 def Home(request):
 
@@ -17,6 +17,8 @@ def Empr(request):
 
 	return render(request,'empr.html')
 
+
+@login_required
 def Perfil_usuario(request):
-    
+
     return render(request, 'perfil.html')
